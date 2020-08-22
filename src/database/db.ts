@@ -3,9 +3,9 @@ import { environment } from "../env/enviroment";
 
 import { Pool } from "pg";
 export const connection =  new Pool({
-    user: environment.user_postgre,
-    host: environment.host_postgre,
-    database: environment.database_postgre,
-    password: environment.password_postgre,
-    port: 5432,
+    user: environment.USER_POSTGRE,
+    host: environment.HOST_POSTGRE,
+    database: environment.DATABASE_POSTGRE,
+    password: environment.PASSWORD_POSTGRE,
+    port: environment.PORT_POSTGRE,
 });

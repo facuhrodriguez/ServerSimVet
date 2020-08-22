@@ -1,6 +1,8 @@
 import { QueryResult } from 'pg';
 import { connection } from "../database/db";
 import { UserI } from "../interfaces/userI";
+import bcrypt from "bcryptjs";
+import {environment} from '../env/enviroment';
 
 export const insert = async (user : UserI) => {
     const results : QueryResult = await connection.query(`INSERT INTO "simulador"."User"
@@ -27,13 +29,13 @@ export const getCredentials = async (email:string, password:string) => {
     return result.rows[0];
 }
 
-export const update = async (e_mail: string, user : UserI) => {
+export const update = async (id_user: number, user : UserI) => {
     const results : QueryResult = await connection.query(`UPDATE "simulador"."User" SET
             name = $2,
             surname = $3,
             password = $4,
             institution = $5
-        WHERE e_mail=$1`, [e_mail, user.name, user.surname, user.password, user.institution]);
+        WHERE id_user=$1`, [id_user, user.name, user.surname, user.password, user.institution]);
     return results;
 }
 
@@ -41,4 +43,13 @@ export const remove = async (id_user: number) => {
     const result : QueryResult = await connection.query(`DELETE FROM "simulador"."User"
         WHERE id_user = $1`, [id_user]);
     return result;
+}
+
+export async function encryptPassword (password: string) : Promise<string> {
+    const salt = await bcrypt.genSalt(environment.SALT_PASSWORD);
+    return bcrypt.hash(password, salt);
+}
+
+export async function comparePassword (password: string, hash:string) {
+    return await bcrypt.compare(password, hash);
 }

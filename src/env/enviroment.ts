@@ -1,11 +1,14 @@
 import * as dotenv from "dotenv";
-dotenv.config();
-export let environment = {
-    port: process.env.PORT,
-    host_postgre: process.env.HOST_POSTGRE,
-    port_postgre: process.env.PORT_POSTGRE,
-    database_postgre: process.env.DATABASE_POSTGRE,
-    user_postgre: process.env.USER_POSTGRE,
-    password_postgre: process.env.PASSWORD_POSTGRE,
-    api_url: process.env.API_URL,
+
+dotenv.config({path: `${__dirname}/../../.env`});
+
+export const environment = {
+    PORT: process.env.PORT,
+    HOST_POSTGRE: process.env.HOST_POSTGRE,
+    PORT_POSTGRE: parseInt(process.env.PORT_POSTGRE),
+    DATABASE_POSTGRE: process.env.DATABASE_POSTGRE,
+    USER_POSTGRE: process.env.USER_POSTGRE,
+    PASSWORD_POSTGRE: process.env.PASSWORD_POSTGRE,
+    API_URL: process.env.API_URL,
+    SALT_PASSWORD: parseInt(process.env.SALT_PASSWORD),
 }
