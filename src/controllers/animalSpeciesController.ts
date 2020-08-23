@@ -6,7 +6,9 @@ import { Request, Response, NextFunction } from 'express';
 export class AnimalSpeciesController {
 
     public insert(req : Request, res: Response, next: NextFunction) {
-        const as : AnimalSpecieI = req.body;
+        let as : AnimalSpecieI = {
+            name : req.body.name 
+        }
         animalSpeciesModel
             .insert(as)
             .then( (data : QueryResult ) => {
@@ -29,7 +31,9 @@ export class AnimalSpeciesController {
     }
 
     public update (req : Request, res: Response, next: NextFunction) {
-        const as : AnimalSpecieI = req.body;
+        const as : AnimalSpecieI = {
+            name: req.body.name
+        };
         const id_as : number = parseInt(req.params.id_as);
         animalSpeciesModel
             .update(id_as, as)

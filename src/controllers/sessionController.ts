@@ -8,7 +8,7 @@ export class SessionController {
         sessionModel
             .insert(session)
             .then((data:any) => {
-                return res.status(data.status || 201).json(data.payload);
+                return res.status(data.status || 201).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -19,7 +19,7 @@ export class SessionController {
         sessionModel
             .get()
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -32,7 +32,7 @@ export class SessionController {
         sessionModel
             .updateRole(id_role, id_user)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -44,7 +44,7 @@ export class SessionController {
         sessionModel
             .deleteUser(id_user)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);

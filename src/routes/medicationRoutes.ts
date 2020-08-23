@@ -10,7 +10,7 @@ router.route('')
     .post(isAuth, medicationController.insert)
     .get(isAuth, medicationController.get);
 
-router.route('/:id')
+router.route('/:id_med')
     .delete(isAuth, medicationController.delete)
     .put(isAuth, medicationController.update);
 

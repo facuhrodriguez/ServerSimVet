@@ -5,7 +5,7 @@ import  {AnimalSpecieI}  from "../interfaces/AnimalSpecieI";
 
 export const insert = async (as : AnimalSpecieI) => {
     const result: QueryResult = await connection.query(`INSERT INTO "simulador".animalspecies
-        (name) VALUES ($1)`, [name]);
+        (name) VALUES ($1)`, [as.name]);
     return result;
 }
 

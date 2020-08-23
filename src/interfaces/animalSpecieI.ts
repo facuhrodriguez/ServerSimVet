@@ -1,4 +1,4 @@
 export interface AnimalSpecieI {
-    id_as : number,
+    id_as ?: number,
     name: string,
 }

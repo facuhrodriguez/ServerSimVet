@@ -32,9 +32,9 @@ export class Routes {
         // Use cors middleware
         app.use(cors());
 
-        // Enable pre-flight
         app.options("*", cors(options));
         app.use('/api/auth', UserRoutes);
+        app.use('/api/animalSpecies', AnimalSpeciesRoutes);
         app.use('/api/medication', MedicationRoutes);
         app.use('/api/arrhythmia', ArrhythmiaRoutes);
         app.use('/api/scenario', ScenarioRoutes);

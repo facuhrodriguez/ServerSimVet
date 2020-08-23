@@ -19,7 +19,7 @@ export class MPerScenarioController {
         mPerScenarioModel
             .get()
             .then((data: any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data);
             })
             .catch((err: any) => {
                 next(err);
@@ -33,7 +33,7 @@ export class MPerScenarioController {
         mPerScenarioModel
             .update(mPerScenario, id_scenario, id_medication)
             .then((data: any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data);
             })
             .catch((err:any) =>{
                 next(err);
@@ -46,7 +46,7 @@ export class MPerScenarioController {
         mPerScenarioModel
             .remove(id_scenario, id_medication)
             .then((data:any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data);
             })
             .catch((err: any) => {
                 next(err);

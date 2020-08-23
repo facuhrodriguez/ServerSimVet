@@ -8,7 +8,7 @@ export class PathologyController {
         pathologyModel
             .insert(pat)
             .then((data:any) => {
-                return res.status(data.status || 201).json(data.payload)
+                return res.status(data.status || 201).json(data)
             })
             .catch((err: any) => {
                 next(err);
@@ -19,7 +19,7 @@ export class PathologyController {
         pathologyModel
             .get()
             .then((data:any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data);
             })
             .catch((err: any) => {
                 next(err);
@@ -32,7 +32,7 @@ export class PathologyController {
         pathologyModel
             .update(id_pat, pat)
             .then((data:any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data);
             })
             .catch((err:any)=> {
                 next(err);
@@ -44,7 +44,7 @@ export class PathologyController {
         pathologyModel
             .remove(id_pat)
             .then( (data:any) => {
-                return res.status(data.status || 200).json(data.payload);
+                return res.status(data.status || 200).json(data)
             })
             .catch((err:any)=>{
                 next(err);

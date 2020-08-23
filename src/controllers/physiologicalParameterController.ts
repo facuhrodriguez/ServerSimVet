@@ -8,7 +8,7 @@ export class PhysiologicalParameter {
         physiologicalP
             .insert(pp)
             .then((data:any) => {
-                return res.status(data.status || 201).json(data.payload);
+                return res.status(data.status || 201).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -19,7 +19,7 @@ export class PhysiologicalParameter {
         physiologicalP
             .get()
             .then((data:any) =>{
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -32,7 +32,7 @@ export class PhysiologicalParameter {
         physiologicalP
             .update(id_pp, pp)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -44,7 +44,7 @@ export class PhysiologicalParameter {
         physiologicalP
             .remove(id_pp)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);

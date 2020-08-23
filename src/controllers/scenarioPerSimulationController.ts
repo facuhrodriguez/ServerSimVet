@@ -8,7 +8,7 @@ export class ScenarioPerSimulationController {
         scenarioPerSimulation
             .insert(sc)
             .then((data:any) => {
-                return res.status(data.status || 201).json(data.payload);
+                return res.status(data.status || 201).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -19,7 +19,7 @@ export class ScenarioPerSimulationController {
         scenarioPerSimulation
             .get()
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -32,7 +32,7 @@ export class ScenarioPerSimulationController {
         scenarioPerSimulation
             .updateScenario(id_scenario, id_simulation)
             .then( (data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -45,7 +45,7 @@ export class ScenarioPerSimulationController {
         scenarioPerSimulation
             .remove(id_scenario, id_simulation)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);

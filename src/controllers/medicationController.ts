@@ -5,10 +5,6 @@ import * as medicationModel from "../models/medication";
 export class MedicationController {
     public insert (req : Request, res : Response, next: NextFunction) {
         const med : MedicationI = req.body;
-        if (! med ){
-            next(new Error());
-        }
-
         medicationModel
             .insert(med)
             .then( (data) => {

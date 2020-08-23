@@ -9,7 +9,7 @@ export class PpPerAsController {
         ppPerAsModel
             .insert(pp)
             .then((data:any)=> {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -20,7 +20,7 @@ export class PpPerAsController {
         ppPerAsModel
             .get()
             .then((data:any) => {
-                return res.status(200).json(data.payload);
+                return res.status(200).json(data);
             })
             .catch((err:any)=> {
                 next(err);
@@ -33,7 +33,7 @@ export class PpPerAsController {
         ppPerAsModel
             .update(id_as, pp)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);
@@ -46,7 +46,7 @@ export class PpPerAsController {
         ppPerAsModel
             .remove(id_as, id_pp)
             .then((data:any) => {
-                return res.status(200 || data.status).json(data.payload);
+                return res.status(200 || data.status).json(data);
             })
             .catch((err:any) => {
                 next(err);

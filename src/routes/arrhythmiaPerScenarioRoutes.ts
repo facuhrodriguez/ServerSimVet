@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { ArrhythmiaPerScenarioController } from "../controllers/arrhythmiaPerScenarioController";
-// import { isAuth } from "../middleware//auth";
 import * as isAuth from '../middleware/auth';
 
 const arrhythmiaPerScenarioController : ArrhythmiaPerScenarioController = new ArrhythmiaPerScenarioController();
