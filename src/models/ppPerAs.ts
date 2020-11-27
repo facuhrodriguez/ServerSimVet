@@ -1,3 +1,27 @@
+import { AnimalSpecies } from './animalSpecies';
+import {Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToMany, JoinTable, OneToMany, ManyToOne, PrimaryColumn} from "typeorm";
+import { PhysiologicalParameter } from './physiologicalParameter';
+import { Spp } from './spp';
+@Entity()
+export class PPperAs extends BaseEntity {
+    @PrimaryColumn()
+    @ManyToOne(() => AnimalSpecies, as => as.ppPerAs)
+    animalSpecie: AnimalSpecies;
+
+    @PrimaryColumn()
+    @ManyToOne(() => PhysiologicalParameter, pp => pp.ppPerAs)
+    physiologicalParameter: PhysiologicalParameter;
+
+    @Column()
+    alert_low: number;
+
+    @Column()
+    alert_high: number;
+
+    @OneToMany(() => Spp, spp=> spp.ppPerAs)
+    spp: Spp[];
+
+}
 // import { QueryResult } from 'pg';
 // import { PPperASI } from './../interfaces/ppPerAsI';
 // import { connection } from "../database/db";

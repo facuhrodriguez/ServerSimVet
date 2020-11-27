@@ -1,5 +1,6 @@
-import { PhysiologicalParameter } from './physiologicalParameter';
-import {Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToMany, JoinTable} from "typeorm";
+import { Simulation } from './simulation';
+import {  PPperAs } from './ppPerAs';
+import {Entity, PrimaryGeneratedColumn, BaseEntity, Column, OneToMany} from "typeorm";
 
 @Entity()
 export class AnimalSpecies extends BaseEntity {
@@ -9,9 +10,11 @@ export class AnimalSpecies extends BaseEntity {
     @Column()
     name: string;
 
-    @ManyToMany(() => PhysiologicalParameter)
-    @JoinTable({name: 'PPperAs'})
-    physilogicalParameters: PhysiologicalParameter[];
+    @OneToMany(() => PPperAs, pp => pp.animalSpecie)
+    ppPerAs: PPperAs[];
+
+    @OneToMany(() => Simulation, sim => sim.animalSpecie)
+    simulation: Simulation[];
 
 }
 

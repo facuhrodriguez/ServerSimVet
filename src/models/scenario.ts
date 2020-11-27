@@ -1,7 +1,8 @@
 import { Pathology } from './pathology';
-
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
-import { Medication } from "./medication";
+import { MperScenario } from './mPerScenario'
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { Arrhythmia } from './arrhythmia';
+import { Spp } from './spp';
 
 @Entity()
 export class Scenario extends BaseEntity {
@@ -18,6 +19,15 @@ export class Scenario extends BaseEntity {
   @JoinTable({ name: 'pahologyperscenario'})
   pathologies: Pathology[];
 
+  @ManyToMany(() => Arrhythmia)
+  @JoinTable({ name: 'arrhythmiaperscenario'})
+  arrhythmias: Arrhythmia[];
+
+  @OneToMany(() => MperScenario, ms => ms.scenario)
+  mPerScenario: MperScenario[];
+
+  @OneToMany(() => Spp, spp => spp.scenario)
+  spp: Spp[];
   
 }
 

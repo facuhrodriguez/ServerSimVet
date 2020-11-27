@@ -11,9 +11,14 @@ export class MperScenario extends BaseEntity {
   @Column()
   unit: string;
 
+  @PrimaryColumn()
   @ManyToOne(() => Medication, medication => medication.scenarios)
   medication: Medication;
-  
+
+  @PrimaryColumn()
+  @ManyToOne(() => Scenario, scenario => scenario.mPerScenario)
+  scenario: Scenario[];
+
 }
 
 // import { QueryResult } from 'pg';
