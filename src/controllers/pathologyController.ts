@@ -1,12 +1,14 @@
 import { PathologyI } from './../interfaces/pathologyI';
 import { Request, Response, NextFunction } from 'express';
-import * as pathologyModel from '../models/pathology';
-
+import { PathologyService } from './../services/pathologyService';
 export class PathologyController {
     public insert(req:Request, res:Response, next: NextFunction) {
-        const pat : PathologyI = req.body;
-        pathologyModel
-            .insert(pat)
+        const pat : PathologyI = {
+            name: req.body?.name,
+            description: req.body.description
+        }
+        PathologyService
+            .create(pat)
             .then((data:any) => {
                 return res.status(data.status || 201).json(data)
             })
@@ -15,9 +17,10 @@ export class PathologyController {
             })
     }
 
-    public get(req:Request, res:Response, next:NextFunction) {
-        pathologyModel
-            .get()
+    public findAll(req:Request, res:Response, next:NextFunction) {
+        let query = {};
+        PathologyService
+            .findAll(query)
             .then((data:any) => {
                 return res.status(data.status || 200).json(data);
             })
@@ -25,31 +28,4 @@ export class PathologyController {
                 next(err);
             })
     }
-
-    public update(req:Request, res:Response, next:NextFunction){
-        const id_pat : number = parseInt(req.params.id_pat);
-        const pat : PathologyI = req.body;
-        pathologyModel
-            .update(id_pat, pat)
-            .then((data:any) => {
-                return res.status(data.status || 200).json(data);
-            })
-            .catch((err:any)=> {
-                next(err);
-            })
-    }
-
-    public delete(req:Request, res:Response, next:NextFunction) {
-        const id_pat : number = parseInt(req.params.id_pat);
-        pathologyModel
-            .remove(id_pat)
-            .then( (data:any) => {
-                return res.status(data.status || 200).json(data)
-            })
-            .catch((err:any)=>{
-                next(err);
-            })
-    }
-
-
 }

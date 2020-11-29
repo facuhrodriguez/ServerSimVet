@@ -1,5 +1,5 @@
 import { SessionI } from '@interfaces/sessionI';
-import * as sessionModel from "../models/session";
+import * as sessionModel from "../entities/session";
 import { Request, Response, NextFunction } from 'express';
 
 export class SessionController {

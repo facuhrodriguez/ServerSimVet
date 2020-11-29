@@ -8,11 +8,11 @@ const router : Router = Router();
 
 router.route('')
     .post(isAuth, arrhythmiaController.insert)
-    .get(isAuth, arrhythmiaController.get);
+    .get(isAuth, arrhythmiaController.findAll);
 
-router.route('/:id_arr')
-    .delete( isAuth, arrhythmiaController.delete)
-    .put(isAuth, arrhythmiaController.update);
+// router.route('/:id_arr')
+//     .delete( isAuth, arrhythmiaController.delete)
+//     .put(isAuth, arrhythmiaController.update);
 
 
 export const ArrhythmiaRoutes : Router = router;

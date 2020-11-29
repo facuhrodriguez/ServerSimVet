@@ -1,6 +1,6 @@
 import { PCurveI } from './../interfaces/pcurveI';
 import { NextFunction, Request, Response } from 'express';
-import * as pCurveModel from '../models/pcurve';
+import * as pCurveModel from '../entitieses/pcurve';
 
 export class PCurveController {
     public insert(req:Request, res:Response, next:NextFunction) {

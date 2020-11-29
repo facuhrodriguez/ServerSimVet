@@ -1,10 +1,11 @@
-import { ArrhythmiaRepository } from './../repositories/arrhythmiaRepository';
-export class ArrhythmiaService  {
+import { PathologyRepository } from './../repositories/PathologyRepository';
+
+export class PathologyService  {
 
 
     static findAll(query: any) {
         return new Promise((resolve: any, reject: any) => {
-            ArrhythmiaRepository.findAll(query, query?.order, query?.orderBy, query?.limit)
+            PathologyRepository.findAll(query, query?.order, query?.orderBy, query?.limit)
                 .then((arrhytmias: any) => {
                     resolve(arrhytmias);
                 })
@@ -14,9 +15,9 @@ export class ArrhythmiaService  {
         });
     }
 
-    static create(arrhythmiaData: any) {
+    static create(patData: any) {
         return new Promise((resolve: any, reject: any) => {
-            ArrhythmiaRepository.create(arrhythmiaData)
+            PathologyRepository.create(patData)
             .then((data) => {
                 resolve(data);
             })

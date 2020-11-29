@@ -1,6 +1,6 @@
 import { SimulationI } from '@interfaces/simulationI';
 import { Request, Response, NextFunction } from 'express';
-import * as simulationModel from "../models/simulation";
+import * as simulationModel from "../entitieses/simulation";
 
 export class SimulationController {
     public insert(req:Request, res:Response, next:NextFunction) {

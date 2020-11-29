@@ -7,8 +7,8 @@ export const isAuth = (req:Request, res:Response, next:NextFunction) => {
             const bearer = bearerHeader.split(" ");
             const bearerToken = bearer[1];
             req.headers.authorization = bearerToken;
-            next();
+            return next();
         } else {
-            next(new AuthError());
+            return res.status(401).json('You do not access!')
         }
 }

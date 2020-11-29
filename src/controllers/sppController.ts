@@ -1,5 +1,5 @@
 import { SppI } from '@interfaces/sppI';
-import * as sppModel from "../models/spp";
+import * as sppModel from "../entitieses/spp";
 import { Request, Response, NextFunction } from 'express';
 
 export class SppController {

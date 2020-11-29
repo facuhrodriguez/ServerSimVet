@@ -1,6 +1,6 @@
 import { ScenarioPerSimulationI } from '@interfaces/scenarioPerSimulationI';
 import { NextFunction, Request, Response } from 'express';
-import * as scenarioPerSimulation from "../models/scenarioPerSimulation";
+import * as scenarioPerSimulation from "../entities/scenarioPerSimulation";
 
 export class ScenarioPerSimulationController {
     public insert (req:Request, res:Response, next:NextFunction) {

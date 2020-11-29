@@ -1,5 +1,5 @@
 import { PPperASI } from './../interfaces/ppPerAsI';
-import * as ppPerAsModel from '../models/ppPerAs';
+import * as ppPerAsModel from '../entitieses/ppPerAs';
 import { Request, Response, NextFunction } from 'express';
 
 

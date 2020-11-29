@@ -1,6 +1,6 @@
 import { ArrhythmiaPerScenarioI } from '@interfaces/arrhythmiaPerScenarioI';
 import { Request, Response, NextFunction } from 'express';
-import { ArrhythmiaPerScenarioModel } from "../models/arrhythmiaPerScenario";
+import { ArrhythmiaPerScenarioModel } from "../entities/arrhythmiaPerScenario";
 
 export class ArrhythmiaPerScenarioController {
 

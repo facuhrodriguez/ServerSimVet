@@ -7,11 +7,11 @@ const medicationController : MedicationController = new MedicationController();
 const router : Router = Router();
 
 router.route('')
-    .post(isAuth, medicationController.insert)
-    .get(isAuth, medicationController.get);
+    .post(isAuth, medicationController.create)
+    .get(isAuth, medicationController.findAll);
 
-router.route('/:id_med')
-    .delete(isAuth, medicationController.delete)
-    .put(isAuth, medicationController.update);
+// router.route('/:id_med')
+//     .delete(isAuth, medicationController.delete)
+//     .put(isAuth, medicationController.update);
 
 export const MedicationRoutes : Router = router;

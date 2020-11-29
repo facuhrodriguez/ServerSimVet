@@ -7,10 +7,6 @@ const router : Router = Router();
 
 router.route('')
     .post(isAuth, pathologyController.insert)
-    .get(isAuth, pathologyController.get);
-
-router.route('/:id_pat')
-    .put(isAuth, pathologyController.update)
-    .delete(isAuth, pathologyController.delete)
+    .get(isAuth, pathologyController.findAll);
 
 export const PathologyRoutes : Router = router;

@@ -1,5 +1,5 @@
 import { ScenarioI } from '@interfaces/scenarioI';
-import * as scenariosModel from '../models/scenario';
+import * as scenariosModel from '../entitieses/scenario';
 import { Response, Request, NextFunction } from 'express';
 
 export class ScenarioController {

@@ -1,4 +1,4 @@
-import * as roleModel from '../models/role';
+import * as roleModel from '../entitieses/role';
 import { Response, Request, NextFunction } from 'express';
 import { RoleI } from '../interfaces/roleI';
 

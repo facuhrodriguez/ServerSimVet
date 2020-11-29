@@ -37,17 +37,17 @@ export class Routes {
         app.use('/api/animalSpecies', AnimalSpeciesRoutes);
         app.use('/api/medication', MedicationRoutes);
         app.use('/api/arrhythmia', ArrhythmiaRoutes);
-        app.use('/api/scenario', ScenarioRoutes);
+        // app.use('/api/scenario', ScenarioRoutes);
         app.use('/api/pathology', PathologyRoutes);
-        app.use('/api/simulation', SimulationRoutes);
-        app.use('/api/session', SessionRoutes);
-        app.use('/api/arrhythmiaPerScenario', ArrhythmiaPerScenarioRoutes);
-        app.use('/api/medScenario', MPerScenarioRoutes);
-        app.use('/api/pcurve', PCurveRoutes);
-        app.use('/api/physiologicalParameter', PhysiologicalParameterRoutes);
-        app.use('/api/ppPerAs', PpPerAsRoutes);
-        app.use('/api/role', RoleRoutes);
-        app.use('/api/scenarioSimulation', ScenarioPerSimulationRoutes);
-        app.use('/api/spp', SppRoutes);
+        // app.use('/api/simulation', SimulationRoutes);
+        // app.use('/api/session', SessionRoutes);
+        // app.use('/api/arrhythmiaPerScenario', ArrhythmiaPerScenarioRoutes);
+        // app.use('/api/medScenario', MPerScenarioRoutes);
+        // app.use('/api/pcurve', PCurveRoutes);
+        // app.use('/api/physiologicalParameter', PhysiologicalParameterRoutes);
+        // app.use('/api/ppPerAs', PpPerAsRoutes);
+        // app.use('/api/role', RoleRoutes);
+        // app.use('/api/scenarioSimulation', ScenarioPerSimulationRoutes);
+        // app.use('/api/spp', SppRoutes);
     }
 }

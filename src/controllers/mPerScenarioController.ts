@@ -1,5 +1,5 @@
 import { MPerScenarioI } from './../interfaces/mPerScenarioI';
-import * as mPerScenarioModel from '../models/mPerScenario';
+import * as mPerScenarioModel from '../entitieses/mPerScenario';
 import { Request, Response, NextFunction} from 'express';
 
 export class MPerScenarioController {
