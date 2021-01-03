@@ -7,7 +7,7 @@ export class MedicationController {
     public create(req: Request, res:Response, next:NextFunction) {
         const med: MedicationI = {
             name: req.body.name,
-            description: req.body?.description
+            description: req.body?.description,
         }
 
         MedicationService.create(med).then((medication) => {

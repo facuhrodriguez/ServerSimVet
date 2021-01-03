@@ -1,4 +1,4 @@
-import { Arrhythmia } from './../entities/arrhythmia';
+import { Arrhythmia } from '../entity/arrhythmia';
 import { getManager } from 'typeorm';
 
 export class ArrhythmiaRepository {

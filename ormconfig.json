@@ -1,0 +1,14 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "facundo95",
+    "database": "postgres",
+    "entities": ["src/entity/*.ts"],
+    "synchronize": true,
+    "logging": ["error", "query", "info", "log", "schema"],
+    "cli": {
+        "entitiesDir": "src/entity/*.ts"
+    }
+ }

@@ -10,7 +10,7 @@ export class UserController {
     let userData : LoginI;
     userData = {
       email : req.body.email,
-      password: req.body.password
+      password: req.body.password,
     };
 
     UserService.login(userData.email, userData.password).then((user) => {

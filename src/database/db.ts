@@ -1,24 +1,17 @@
-import { AnimalSpecies } from '../entities/animalSpecies';
-import { environment } from "../env/enviroment";
-// const { Pool } = require("pg");
-import {createConnection} from "typeorm";
+import {createConnection, getConnection} from "typeorm";
 
-export const db =  createConnection({
+export class DatabaseConfig {
+    static async connection() {
+        try {
+            await createConnection();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    type: 'postgres',
-    schema: 'public',
-    host: environment.HOST_POSTGRE,
-    port: environment.PORT_POSTGRE,
-    username: environment.USER_POSTGRE,
-    password: environment.PASSWORD_POSTGRE,
-    database: environment.DATABASE_POSTGRE,
-    entities: ["src/entities/*.ts"]
-})
+    static getconnection() {
+        return getConnection();
+    }
 
-// export const connection =  new Pool({
-//     user: environment.USER_POSTGRE,
-//     host: environment.HOST_POSTGRE,
-//     database: environment.DATABASE_POSTGRE,
-//     password: environment.PASSWORD_POSTGRE,
-//     port: environment.PORT_POSTGRE,
-// });
+}
+

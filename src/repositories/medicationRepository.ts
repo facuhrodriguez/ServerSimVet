@@ -1,4 +1,4 @@
-import { Medication } from './../entities/medication';
+import { Medication } from '../entity/medication';
 import { getManager } from 'typeorm';
 
 export class MedicationRepository {

@@ -1,5 +1,5 @@
 import { AnimalSpecies } from './animalSpecies';
-import { BaseEntity, Entity, Column, ManyToMany, ManyToOne, PrimaryColumn, JoinTable, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Entity, Column, ManyToMany, ManyToOne, JoinTable, PrimaryGeneratedColumn } from "typeorm";
 import { Scenario } from "./scenario";
 
 @Entity('simulation')

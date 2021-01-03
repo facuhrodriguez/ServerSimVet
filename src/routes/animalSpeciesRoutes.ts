@@ -6,9 +6,10 @@ const animalSpeciesController : AnimalSpeciesController = new AnimalSpeciesContr
 const router : Router = Router();
 router.route('')
     .post(isAuth, animalSpeciesController.create)
-    .get(isAuth, animalSpeciesController.findAll);
-// router.route('/:id_as')
-//     .delete(isAuth, animalSpeciesController.delete)
+    .get(animalSpeciesController.findAll);
+
+router.route('/:id')
+    .delete(isAuth, animalSpeciesController.delete);
 //     .put(isAuth, animalSpeciesController.update);
 
 export const AnimalSpeciesRoutes : Router = router;

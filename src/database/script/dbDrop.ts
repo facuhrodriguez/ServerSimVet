@@ -1,18 +1,20 @@
 import { DatabaseConfig } from "../db";
-
 DatabaseConfig.connection()
-  .then(async () => {
+  .then(async (_db) => {
     const queryRunner = DatabaseConfig.getconnection();
-    queryRunner
-      .query(`CREATE SCHEMA IF NOT EXISTS simvet`)
+    await queryRunner
+      .query(`DROP SCHEMA IF EXISTS simvet CASCADE`)
       .then((cc) => {
-        console.log("Schema simvet created!");
+        console.log("Schema simvet deleted!");
+        return;
       })
       .catch((err) => {
+        console.log(err);
         throw err;
       });
   })
   .catch((err) => {
     console.log(err);
-    return;
+    throw err;
   });
+

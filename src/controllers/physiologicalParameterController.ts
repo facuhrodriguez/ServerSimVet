@@ -1,5 +1,5 @@
 import { PhysiologicalParameterI } from './../interfaces/physiologicalParameterI';
-import * as physiologicalP from '../entities/physiologicalParameter';
+import * as physiologicalP from '../entity/physiologicalParameter';
 import { Request, Response, NextFunction} from 'express';
 
 export class PhysiologicalParameter {

@@ -1,5 +1,5 @@
-import { AnimalSpecies } from "../entities/animalSpecies";
-import { getManager } from "typeorm";
+import { AnimalSpecies } from "../entity/animalSpecies";
+import { getManager, ObjectID } from "typeorm";
 
 export class AnimalSpeciesRepository {
   static async create(animalSpecie: any) {
@@ -13,5 +13,11 @@ export class AnimalSpeciesRepository {
       .createQueryBuilder(query)
       .orderBy(orderBy, order)
       .paginate(limit);
+  }
+
+  static async deleteById(id: number) {
+    return await getManager()
+      .getRepository(AnimalSpecies)
+      .delete({id_as: id});
   }
 }

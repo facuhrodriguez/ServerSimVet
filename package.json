@@ -9,7 +9,14 @@
     "postinstall": "npm run build",
     "start": "node --experimental-worker dist/server.js",
     "start:ts": "ts-node ./src/server.ts",
-    "start:reload": "ts-node-dev ./src/server.ts"
+    "start:reload": "ts-node-dev ./src/server.ts",
+    "db:create": "ts-node src/database/script/dbCreate.ts",
+    "db:sync": "ts-node src/database/script/dbSync.ts",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:createSchema && npm run db:sync",
+    "db:drop": "ts-node src/database/script/dbDrop.ts",
+    "db:createSchema": "ts-node src/database/script/dbCreateSchema.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "db:setup:docker": "ts-node src/database/script/dbCreateRole.ts"
   },
   "author": "Facundo Hernán Rodríguez",
   "license": "GPL-3.0-or-later",
