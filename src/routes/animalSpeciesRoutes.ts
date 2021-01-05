@@ -5,11 +5,11 @@ import { isAuth } from "../middleware/auth";
 const animalSpeciesController : AnimalSpeciesController = new AnimalSpeciesController();
 const router : Router = Router();
 router.route('')
-    .post(isAuth, animalSpeciesController.create)
+    .post(animalSpeciesController.create)
     .get(animalSpeciesController.findAll);
 
 router.route('/:id')
-    .delete(isAuth, animalSpeciesController.delete);
-//     .put(isAuth, animalSpeciesController.update);
+    .delete(animalSpeciesController.delete)
+    .put(animalSpeciesController.updateById);
 
 export const AnimalSpeciesRoutes : Router = router;

@@ -16,6 +16,7 @@
     "db:drop": "ts-node src/database/script/dbDrop.ts",
     "db:createSchema": "ts-node src/database/script/dbCreateSchema.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "db:migration": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "db:setup:docker": "ts-node src/database/script/dbCreateRole.ts"
   },
   "author": "Facundo Hernán Rodríguez",

@@ -10,6 +10,9 @@ export class AnimalSpecies extends BaseEntity {
     @Column({type: "varchar"})
     name: string;
 
+    @Column({ type: "varchar", nullable: true })
+    description: string;
+
     @OneToMany(() => PPperAs, pp => pp.animalSpecie)
     ppPerAs: PPperAs[];
 

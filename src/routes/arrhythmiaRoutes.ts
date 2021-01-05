@@ -7,12 +7,12 @@ const arrhythmiaController : ArrhythmiaController = new ArrhythmiaController();
 const router : Router = Router();
 
 router.route('')
-    .post(isAuth, arrhythmiaController.insert)
-    .get(isAuth, arrhythmiaController.findAll);
+    .post(arrhythmiaController.insert)
+    .get(arrhythmiaController.findAll);
 
-// router.route('/:id_arr')
-//     .delete( isAuth, arrhythmiaController.delete)
-//     .put(isAuth, arrhythmiaController.update);
+router.route('/:id')
+    .delete( arrhythmiaController.delete)
+    .put(arrhythmiaController.updateById);
 
 
 export const ArrhythmiaRoutes : Router = router;
