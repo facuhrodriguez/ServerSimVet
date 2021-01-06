@@ -21,6 +21,7 @@ export class ArrhythmiaController {
         next(err);
       });
   }
+  
   public insert(req: Request, res: Response, next: NextFunction) {
     const arr: ArrhythmiaI = {
       name: req.body.name,
