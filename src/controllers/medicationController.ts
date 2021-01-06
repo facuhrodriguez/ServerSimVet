@@ -26,7 +26,7 @@ export class MedicationController {
     const orderBy = req.query.orderBy ? req.query.orderBy : "name";
     const order = req.query.order ? req.query.order : "ASC";
     const limit: number = Number(req.query.limit);
-    MedicationService.findAll(query)
+    MedicationService.findAll(query, orderBy, order, limit)
       .then((medications) => {
         return res.status(200).json(medications);
       })

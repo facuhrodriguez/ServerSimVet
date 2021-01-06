@@ -2,10 +2,10 @@ import { MedicationRepository } from './../repositories/medicationRepository';
 
 export class MedicationService  {
 
-    static findAll(query: any) {
+    static findAll(query: any, orderBy: any, order: any, limit:number) {
         const _query = MedicationService.setUpQuery(query);
         return new Promise((resolve: any, reject: any) => {
-            MedicationRepository.findAll(_query, query?.order, query?.orderBy, query?.limit)
+            MedicationRepository.findAll(_query, order, orderBy, limit)
                 .then((medications: any) => {
                     resolve(medications);
                 })
