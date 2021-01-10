@@ -6,11 +6,11 @@ const pathologyController : PathologyController = new PathologyController();
 const router : Router = Router();
 
 router.route('')
-    .post(pathologyController.insert)
-    .get(pathologyController.findAll);
+    .post(isAuth, pathologyController.insert)
+    .get(isAuth, pathologyController.findAll);
 
 router.route('/:id')
-    .put(pathologyController.updateById)
-    .delete(pathologyController.delete);
+    .put(isAuth, pathologyController.updateById)
+    .delete(isAuth, pathologyController.delete);
 
 export const PathologyRoutes : Router = router;

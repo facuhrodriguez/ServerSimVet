@@ -3,6 +3,7 @@ import { AuthError } from "../errors/authError";
 
 export const isAuth = (req:Request, res:Response, next:NextFunction) => {
     const bearerHeader = req.headers.authorization;
+    console.log(bearerHeader);
         if (typeof bearerHeader !== 'undefined') {
             const bearer = bearerHeader.split(" ");
             const bearerToken = bearer[1];
