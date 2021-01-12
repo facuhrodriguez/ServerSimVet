@@ -33,7 +33,7 @@ SimVet project Server
      
 
 
-4. Run command: cd docker/ && docker-compose up
+4. Run command in console: cd docker/ && docker-compose up
 
 5. Restart DB
       npm run db:reset
