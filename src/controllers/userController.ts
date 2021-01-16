@@ -8,6 +8,7 @@ export class UserController {
 
   public async login(req:Request, res:Response, next:NextFunction){
     let userData : LoginI;
+    console.log("afs")
     userData = {
       email : req.body.email,
       password: req.body.password,
@@ -37,12 +38,11 @@ export class UserController {
       password: req.body.password,
       institution: req.body?.institution
     }
-
     UserService.register(userData).then((user) => {
       return res.status(200).json(user);
     })
     .catch((err) => {
-      return res.status(500).json(err);
+      next(err);
     })
   }
 }
