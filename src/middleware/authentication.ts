@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-
 export const authentication = async (req: Request, res: Response, next: NextFunction) => {
   if ((req.headers && req.headers.authorization) || (req.query && req.query.access_token)) {
     let jwtToken: string = null;

@@ -1,4 +1,4 @@
-import { AnimalSpeciesRepository } from "./../repositories/animalSpeciesRepository";
+import { AnimalSpeciesRepository } from './../repositories/animalSpeciesRepository';
 
 export class AnimalSpeciesService {
   static findAll(query: any, order: any, orderBy: any, limit: number) {

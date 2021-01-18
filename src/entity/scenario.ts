@@ -1,6 +1,14 @@
 import { Pathology } from './pathology';
-import { MperScenario } from './mPerScenario'
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { MperScenario } from './mPerScenario';
+import {
+  BaseEntity,
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+} from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
 import { Spp } from './spp';
 
@@ -9,24 +17,23 @@ export class Scenario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_scenario: number;
 
-  @Column({ type: 'varchar'})
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'varchar'})
+  @Column({ type: 'varchar' })
   description: string;
 
   @ManyToMany(() => Pathology)
-  @JoinTable({ name: 'pahologyperscenario'})
+  @JoinTable({ name: 'pahologyperscenario' })
   pathologies: Pathology[];
 
   @ManyToMany(() => Arrhythmia)
-  @JoinTable({ name: 'arrhythmiaperscenario'})
+  @JoinTable({ name: 'arrhythmiaperscenario' })
   arrhythmias: Arrhythmia[];
 
-  @OneToMany(() => MperScenario, ms => ms.scenario)
+  @OneToMany(() => MperScenario, (ms) => ms.scenario)
   mPerScenario: MperScenario[];
 
-  @OneToMany(() => Spp, spp => spp.scenario)
+  @OneToMany(() => Spp, (spp) => spp.scenario)
   spp: Spp[];
-  
 }

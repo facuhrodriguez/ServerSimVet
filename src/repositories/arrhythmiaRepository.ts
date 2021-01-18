@@ -1,17 +1,12 @@
-import { Arrhythmia } from "../entity/arrhythmia";
-import { getManager } from "typeorm";
+import { Arrhythmia } from '../entity/arrhythmia';
+import { getManager } from 'typeorm';
 
 export class ArrhythmiaRepository {
   static create(arrData: any) {
     return getManager().getRepository(Arrhythmia).save(arrData);
   }
 
-  static findAll(
-    query: any,
-    order: any = "DESC",
-    orderBy: any = "name",
-    limit: number = 20
-  ) {
+  static findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
     return getManager()
       .getRepository(Arrhythmia)
       .createQueryBuilder()
@@ -26,7 +21,7 @@ export class ArrhythmiaRepository {
       .createQueryBuilder()
       .update(Arrhythmia, arrhythmiaData)
       .where({ id_arr: id })
-      .returning("*")
+      .returning('*')
       .updateEntity(true)
       .execute();
   }

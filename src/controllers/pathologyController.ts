@@ -1,6 +1,6 @@
-import { PathologyI } from "./../interfaces/pathologyI";
-import { Request, Response, NextFunction } from "express";
-import { PathologyService } from "./../services/pathologyService";
+import { PathologyI } from './../interfaces/pathologyI';
+import { Request, Response, NextFunction } from 'express';
+import { PathologyService } from './../services/pathologyService';
 export class PathologyController {
   public insert(req: Request, res: Response, next: NextFunction) {
     const pat: PathologyI = {
@@ -21,8 +21,8 @@ export class PathologyController {
       name: req.query?.name,
       description: req.query?.description,
     };
-    const orderBy = req.query.orderBy ? req.query.orderBy : "name";
-    const order = req.query.order ? req.query.order : "ASC";
+    const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
+    const order = req.query.order ? req.query.order : 'ASC';
     const limit: number = Number(req.query.limit);
     PathologyService.findAll(query, orderBy, order, limit)
       .then((pathologies) => {
@@ -48,9 +48,7 @@ export class PathologyController {
       .catch((err) => {
         next(err);
       });
-
   }
-
 
   public delete(req: Request, res: Response, next: NextFunction) {
     const id = parseInt(req.params.id);

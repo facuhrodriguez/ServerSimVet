@@ -1,16 +1,16 @@
-import { PathologyRepository } from "./../repositories/PathologyRepository";
+import { PathologyRepository } from './../repositories/PathologyRepository';
 
 export class PathologyService {
   static findAll(query: any, orderBy: any, order: any, limit: number) {
     return new Promise((resolve: any, reject: any) => {
       const _query = PathologyService.setUpQuery(query);
-        PathologyRepository.findAll(_query, order, orderBy, limit)
-          .then((pathologies: any) => {
-            resolve(pathologies);
-          })
-          .catch((err: any) => {
-            reject(err);
-          });
+      PathologyRepository.findAll(_query, order, orderBy, limit)
+        .then((pathologies: any) => {
+          resolve(pathologies);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 

@@ -1,15 +1,15 @@
-import {DatabaseConfig} from './../db';
-
+import { DatabaseConfig } from './../db';
 
 DatabaseConfig.connection().then(() => {
-    const connection = DatabaseConfig.getconnection();
+  const connection = DatabaseConfig.getconnection();
 
-    connection.synchronize(true)
+  connection
+    .synchronize(true)
     .then(() => {
-        console.log('Database synchronized!');
-        return;
+      console.log('Database synchronized!');
+      return;
     })
     .catch((err) => {
-        console.log(err);
-    })
+      console.log(err);
+    });
 });

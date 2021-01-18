@@ -1,17 +1,12 @@
-import { User } from "../entity/user";
-import { getManager } from "typeorm";
+import { User } from '../entity/user';
+import { getManager } from 'typeorm';
 
 export class UserRepository {
   static async create(userData: any) {
     return await getManager().getRepository(User).save(userData);
   }
 
-  static async findAll(
-    query: any,
-    order: any = "DESC",
-    orderBy: any = "name",
-    limit: number = 20
-  ) {
+  static async findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
     return await getManager()
       .getRepository(User)
       .createQueryBuilder()
@@ -21,6 +16,6 @@ export class UserRepository {
   }
 
   static async findByEmail(email: any) {
-      return await getManager().getRepository(User).findOne({email: email});
+    return await getManager().getRepository(User).findOne({ email: email });
   }
 }

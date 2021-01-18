@@ -1,14 +1,9 @@
-import { ScenarioRepository } from "./../repositories/scenarioRepository";
+import { ScenarioRepository } from './../repositories/scenarioRepository';
 export class ScenarioService {
   static findAll(query: any, order: any, orderBy: any, limit: number) {
     return new Promise((resolve: any, reject: any) => {
-        const _query = ScenarioService.setUpQuery(query);
-        ScenarioRepository.findAll(
-        _query,
-        order,
-        orderBy,
-        limit
-      )
+      const _query = ScenarioService.setUpQuery(query);
+      ScenarioRepository.findAll(_query, order, orderBy, limit)
         .then((scenarios: any) => {
           resolve(scenarios);
         })

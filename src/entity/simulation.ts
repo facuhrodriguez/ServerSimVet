@@ -1,4 +1,4 @@
-import { AnimalSpecies } from "./animalSpecies";
+import { AnimalSpecies } from './animalSpecies';
 import {
   BaseEntity,
   Entity,
@@ -8,25 +8,25 @@ import {
   JoinTable,
   PrimaryGeneratedColumn,
   JoinColumn,
-} from "typeorm";
-import { Scenario } from "./scenario";
+} from 'typeorm';
+import { Scenario } from './scenario';
 
-@Entity("simulation")
+@Entity('simulation')
 export class Simulation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_simulation: number;
 
-  @Column({ type: "varchar" })
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: 'varchar' })
   description: string;
 
   @ManyToMany(() => Scenario)
-  @JoinTable({ name: "scenariopersimulation" })
+  @JoinTable({ name: 'scenariopersimulation' })
   scenario: Scenario[];
 
   @ManyToOne(() => AnimalSpecies, (as) => as.simulation)
-  @JoinColumn({ name: "id_as" })
+  @JoinColumn({ name: 'id_as' })
   animalSpecie: AnimalSpecies;
 }

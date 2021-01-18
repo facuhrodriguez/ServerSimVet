@@ -1,12 +1,12 @@
-import { AnimalSpeciesService } from "./../services/animalSpeciesService";
-import { AnimalSpecieI } from "../interfaces/animalSpecieI";
-import { Request, Response, NextFunction } from "express";
+import { AnimalSpeciesService } from './../services/animalSpeciesService';
+import { AnimalSpecieI } from '../interfaces/animalSpecieI';
+import { Request, Response, NextFunction } from 'express';
 
 export class AnimalSpeciesController {
   public create(req: Request, res: Response, next: NextFunction) {
     let as: AnimalSpecieI = {
       name: req.body.name,
-      description: req.body?.description
+      description: req.body?.description,
     };
 
     AnimalSpeciesService.create(as)
@@ -21,12 +21,12 @@ export class AnimalSpeciesController {
   public findAll(req: Request, res: Response, next: NextFunction) {
     let query = {
       name: req.query?.name,
-      description: req.query?.description
-    }
+      description: req.query?.description,
+    };
     const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
     const order = req.query.order ? req.query.order : 'ASC';
-    const limit : number = req.query.limit ? parseInt(req.query.limit.toString()) : 10;
-    
+    const limit: number = req.query.limit ? parseInt(req.query.limit.toString()) : 10;
+
     AnimalSpeciesService.findAll(query, order, orderBy, limit)
       .then((animalSpecies: any) => {
         return res.status(200).json(animalSpecies);

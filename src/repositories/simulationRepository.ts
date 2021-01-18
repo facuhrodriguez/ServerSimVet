@@ -1,6 +1,6 @@
-import { AnimalSpecies } from "./../entity/animalSpecies";
-import { Simulation } from "./../entity/simulation";
-import { getManager } from "typeorm";
+import { AnimalSpecies } from './../entity/animalSpecies';
+import { Simulation } from './../entity/simulation';
+import { getManager } from 'typeorm';
 
 export class SimulationRepository {
   static async create(simulation: any) {
@@ -9,14 +9,14 @@ export class SimulationRepository {
 
   static async findAll(
     query: any = null,
-    order: any = "DESC",
-    orderBy: any = "simulation.name",
+    order: any = 'DESC',
+    orderBy: any = 'simulation.name',
     limit: number = 20
   ) {
     let result: any = await getManager()
       .getRepository(Simulation)
-      .createQueryBuilder("simulation")
-      .innerJoinAndSelect("simulation.animalSpecie", "as")
+      .createQueryBuilder('simulation')
+      .innerJoinAndSelect('simulation.animalSpecie', 'as')
       .orderBy(orderBy, order)
       .paginate(limit);
 
@@ -33,9 +33,7 @@ export class SimulationRepository {
   }
 
   static async deleteById(id: number) {
-    return await getManager()
-      .getRepository(Simulation)
-      .delete({ id_simulation: id });
+    return await getManager().getRepository(Simulation).delete({ id_simulation: id });
   }
 
   static async updateById(id: number, simulationData: any) {
@@ -44,7 +42,7 @@ export class SimulationRepository {
       .createQueryBuilder()
       .update(Simulation, simulationData)
       .where({ id_simulation: id })
-      .returning("*")
+      .returning('*')
       .updateEntity(true)
       .execute();
   }

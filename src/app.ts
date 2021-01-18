@@ -1,9 +1,9 @@
-import express from "express";
-import * as bodyParser from "body-parser";
-import { Routes } from "./routes";
-const errors = require("./middleware/errors");
-import { DatabaseConfig } from "./database/db";
-import { pagination } from "typeorm-pagination";
+import express from 'express';
+import * as bodyParser from 'body-parser';
+import { Routes } from './routes';
+const errors = require('./middleware/errors');
+import { DatabaseConfig } from './database/db';
+import { pagination } from 'typeorm-pagination';
 class App {
   public app: express.Application;
   public routes: Routes = new Routes();
@@ -11,10 +11,10 @@ class App {
   constructor() {
     DatabaseConfig.connection()
       .then(() => {
-        console.log("Connection to database success!");
+        console.log('Connection to database success!');
       })
       .catch((err) => {
-        console.error("Error - ", err);
+        console.error('Error - ', err);
       });
     this.app = express();
     this.config();

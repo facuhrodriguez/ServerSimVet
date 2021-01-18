@@ -12,21 +12,18 @@
     "sourceMap": true,
     "rootDir": "./src",
     "outDir": "dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      
-      "@env/*": [ "src/env/*"],
-      "@database/*": [ "src/database/*" ],
+      "@env/*": ["src/env/*"],
+      "@database/*": ["src/database/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@entities/*":["src/entities/*"],
-      "@errors/*":["src/errors/*"],
-      "../controllers/*":["src/controllers/*"],
-      "@middleware/*":["src/middleware/*"],
-      "@routes/*":["src/routes/*"]
+      "@entities/*": ["src/entities/*"],
+      "@errors/*": ["src/errors/*"],
+      "../controllers/*": ["src/controllers/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@routes/*": ["src/routes/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

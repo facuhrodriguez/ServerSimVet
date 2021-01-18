@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-console": "warn",
+    "prefer-destructuring": "warn",
+    "camelcase": "warn",
+    "no-underscore-dangle": "warn",
+    "no-param-reassign": "warn",
+    "prefer-rest-params": "warn",
+    "max-len": ["warn", { "code": 100 }],
+    "no-restricted-syntax": "warn",
+    "node/no-unpublished-require": "warn",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+  },
+  "ignorePatterns": ["test/*", "src/seeds/*", "src/migrations/*"]
+}

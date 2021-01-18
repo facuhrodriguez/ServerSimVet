@@ -1,4 +1,4 @@
-import { DatabaseConfig } from "../db";
+import { DatabaseConfig } from '../db';
 
 DatabaseConfig.connection()
   .then(async () => {
@@ -6,7 +6,7 @@ DatabaseConfig.connection()
     queryRunner
       .query(`CREATE SCHEMA IF NOT EXISTS simvet`)
       .then((cc) => {
-        console.log("Schema simvet created!");
+        console.log('Schema simvet created!');
       })
       .catch((err) => {
         throw err;

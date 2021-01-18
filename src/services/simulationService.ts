@@ -1,4 +1,4 @@
-import { SimulationRepository } from "./../repositories/simulationRepository";
+import { SimulationRepository } from './../repositories/simulationRepository';
 
 export class SimulationService {
   static findAll(query: any, order: any, orderBy: any, limit: number) {

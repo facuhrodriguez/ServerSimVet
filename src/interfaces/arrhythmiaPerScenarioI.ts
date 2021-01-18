@@ -1,4 +1,4 @@
 export interface ArrhythmiaPerScenarioI {
-    id_scenario : number,
-    id_arr : number
+  id_scenario: number;
+  id_arr: number;
 }

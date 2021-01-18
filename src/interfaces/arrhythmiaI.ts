@@ -1,5 +1,5 @@
 export interface ArrhythmiaI {
-    id_arr ?: number,
-    name: string,
-    description: string
+  id_arr?: number;
+  name: string;
+  description: string;
 }

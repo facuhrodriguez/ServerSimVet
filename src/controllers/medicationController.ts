@@ -1,6 +1,6 @@
-import { MedicationI } from "../interfaces/medicationI";
-import { Request, Response, NextFunction } from "express";
-import { MedicationService } from "../services/medicationService";
+import { MedicationI } from '../interfaces/medicationI';
+import { Request, Response, NextFunction } from 'express';
+import { MedicationService } from '../services/medicationService';
 
 export class MedicationController {
   public create(req: Request, res: Response, next: NextFunction) {
@@ -23,8 +23,8 @@ export class MedicationController {
       name: req.query?.name,
       description: req.query?.description,
     };
-    const orderBy = req.query.orderBy ? req.query.orderBy : "name";
-    const order = req.query.order ? req.query.order : "ASC";
+    const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
+    const order = req.query.order ? req.query.order : 'ASC';
     const limit: number = Number(req.query.limit);
     MedicationService.findAll(query, orderBy, order, limit)
       .then((medications) => {

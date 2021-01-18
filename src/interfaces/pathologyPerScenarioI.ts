@@ -1,4 +1,4 @@
 export interface PathologyPerScenarioI {
-    id_scenario : number,
-    id_pat : number
+  id_scenario: number;
+  id_pat: number;
 }

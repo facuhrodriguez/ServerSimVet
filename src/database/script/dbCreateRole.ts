@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import {environment} from '../../env/enviroment';
+import { environment } from '../../env/enviroment';
 
 const superuser = 'postgres';
 const user = environment.USER_POSTGRE;

@@ -1,14 +1,9 @@
-import { ArrhythmiaRepository } from "./../repositories/arrhythmiaRepository";
+import { ArrhythmiaRepository } from './../repositories/arrhythmiaRepository';
 export class ArrhythmiaService {
   static findAll(query: any, order: any, orderBy: any, limit: number) {
     return new Promise((resolve: any, reject: any) => {
-        const _query = ArrhythmiaService.setUpQuery(query);
-      ArrhythmiaRepository.findAll(
-        _query,
-        order,
-        orderBy,
-        limit
-      )
+      const _query = ArrhythmiaService.setUpQuery(query);
+      ArrhythmiaRepository.findAll(_query, order, orderBy, limit)
         .then((arrhytmias: any) => {
           resolve(arrhytmias);
         })
