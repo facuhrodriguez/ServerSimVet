@@ -43,6 +43,5 @@ export class Routes {
     // app.use('/api/ppPerAs', PpPerAsRoutes);
     // app.use('/api/role', RoleRoutes);
     // app.use('/api/scenarioSimulation', ScenarioPerSimulationRoutes);
-    // app.use('/api/spp', SppRoutes);
   }
 }
