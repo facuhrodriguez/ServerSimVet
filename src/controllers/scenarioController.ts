@@ -22,12 +22,12 @@ export class ScenarioController {
       name: req.query?.name,
       description: req.query?.description,
     };
-    const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
+    const orderBy = req.query.orderBy ? req.query.orderBy : 's.name';
     const order = req.query.order ? req.query.order : 'ASC';
     const limit: number = req.query.limit ? parseInt(req.query.limit.toString()) : 10;
     ScenarioService.findAll(query, order, orderBy, limit)
       .then((data: any) => {
-        return res.status(200 || data.status).json(data);
+        return res.status(200).json(data);
       })
       .catch((err: any) => {
         next(err);

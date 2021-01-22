@@ -1,3 +1,4 @@
+import { Simulation } from './simulation';
 import { Pathology } from './pathology';
 import { MperScenario } from './mPerScenario';
 import {
@@ -24,7 +25,7 @@ export class Scenario extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Pathology)
-  @JoinTable({ name: 'pahologyperscenario' })
+  @JoinTable({ name: 'patologyperscenario' })
   pathologies: Pathology[];
 
   @ManyToMany(() => Arrhythmia)
@@ -33,6 +34,10 @@ export class Scenario extends BaseEntity {
 
   @OneToMany(() => MperScenario, (ms) => ms.scenario)
   mPerScenario: MperScenario[];
+
+  @ManyToMany(() => Simulation)
+  @JoinTable({ name: 'scenariopersimulation' })
+  simulations: Simulation[];
 
   @OneToMany(() => Spp, (spp) => spp.scenario)
   spp: Spp[];

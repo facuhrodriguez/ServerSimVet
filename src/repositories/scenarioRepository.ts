@@ -6,11 +6,27 @@ export class ScenarioRepository {
     return await getManager().getRepository(Scenario).save(scenario);
   }
 
-  static async findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
-    let result: any = getManager().getRepository(Scenario).createQueryBuilder();
-    if (query) {
-      result = await result.where(query).orderBy(orderBy, order).paginate(limit);
-    }
+  static async findAll(
+    query: any,
+    order: any = 'DESC',
+    orderBy: any = 's.name',
+    limit: number = 20
+  ) {
+    let result: any = await getManager()
+      .getRepository(Scenario)
+      .createQueryBuilder('s')
+      .innerJoinAndSelect('s.simulations', 'sim')
+      .innerJoinAndSelect('s.arrhythmias', 'arr')
+      .innerJoinAndSelect('s.pathologies', 'pat')
+      .innerJoinAndSelect('s.mPerScenario', 'med')
+      .innerJoinAndSelect('med.medication', 'medication')
+      .where(query)
+      .orderBy(orderBy, order)
+      .paginate(limit);
+    // .where(query);
+    // if (query) {
+    //   result = await result.where(query).orderBy(orderBy, order);
+    // }
     return result;
   }
 
