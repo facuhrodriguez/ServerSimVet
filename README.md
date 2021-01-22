@@ -27,7 +27,7 @@ SimVet project Server
      
      USER_POSTGRE=postgres
      
-     PASSWORD_POSTGRE=PASSWORD
+     PASSWORD_POSTGRE=secret
      
      SALT_PASSWORD = 10
      
