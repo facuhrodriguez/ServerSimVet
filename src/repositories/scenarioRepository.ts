@@ -23,10 +23,7 @@ export class ScenarioRepository {
       .where(query)
       .orderBy(orderBy, order)
       .paginate(limit);
-    // .where(query);
-    // if (query) {
-    //   result = await result.where(query).orderBy(orderBy, order);
-    // }
+
     return result;
   }
 

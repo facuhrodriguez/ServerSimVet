@@ -1,26 +1,17 @@
-// import { AnimalSpecies } from '../entity/animalSpecies';
-// import { getManager, EntityManager, ObjectID } from 'typeorm';
+import { AnimalSpecies } from '../../entity/animalSpecies';
+import { Connection } from 'typeorm';
+import { Factory, Seeder } from 'typeorm-seeding';
 
-// import { DatabaseConfig } from './../db';
-// import { AnimalSpeciesRepository } from '../../../repositories/AnimalSpeciesRepository';
-
-// return DatabaseConfig.connection().then(() => {
-//   const queryRunner = DatabaseConfig.getconnection();
-
-//   const values = [
-//     {
-//       name: 'Equino',
-//       description: 'Test',
-//     },
-//     {
-//       name: 'Canino',
-//       description: 'Canino hasta 20kg',
-//     },
-//   ];
-
-//   values.forEach(async (element) => {
-//     await AnimalSpeciesRepository.create(element);
-//   });
-
-//   // queryRunner.query(`INSERT INTO animalspecies ` )
-// });
+export default class CreateUsers implements Seeder {
+  public async run(factory: Factory, connection: Connection): Promise<any> {
+    await connection
+      .createQueryBuilder()
+      .insert()
+      .into(AnimalSpecies)
+      .values([
+        { name: 'Equino', description: 'Equino hasta 20kg.' },
+        { name: 'Canino', description: 'Canino hasta 10kg.' },
+      ])
+      .execute();
+  }
+}
