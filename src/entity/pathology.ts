@@ -1,4 +1,12 @@
-import { BaseEntity, Entity, Column, ManyToMany, JoinTable, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  Column,
+  ManyToMany,
+  JoinTable,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+} from 'typeorm';
 import { Scenario } from './scenario';
 
 @Entity('patology')
@@ -13,6 +21,14 @@ export class Pathology extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Scenario)
-  @JoinTable({ name: 'patologyperscenario' })
+  @JoinTable({
+    name: 'pathologyperscenario',
+    joinColumn: {
+      name: 'id_pat',
+    },
+    inverseJoinColumn: {
+      name: 'id_scenario',
+    },
+  })
   scenario: Scenario[];
 }

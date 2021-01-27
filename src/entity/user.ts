@@ -29,6 +29,14 @@ export class User extends BaseEntity {
   institution: string;
 
   @ManyToMany(() => Role)
-  @JoinTable({ name: 'session' })
+  @JoinTable({
+    name: 'session',
+    joinColumn: {
+      name: 'id_role',
+    },
+    inverseJoinColumn: {
+      name: 'id_user',
+    },
+  })
   roles: Role[];
 }

@@ -14,6 +14,14 @@ export class Arrhythmia extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Scenario)
-  @JoinTable({ name: 'arrhythmiaperscenario' })
+  @JoinTable({
+    name: 'arrhythmiaperscenario',
+    joinColumn: {
+      name: 'id_scenario',
+    },
+    inverseJoinColumn: {
+      name: 'id_arr',
+    },
+  })
   scenarios: Scenario[];
 }

@@ -23,7 +23,15 @@ export class Simulation extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Scenario)
-  @JoinTable({ name: 'scenariopersimulation' })
+  @JoinTable({
+    name: 'scenariopersimulation',
+    joinColumn: {
+      name: 'id_scenario',
+    },
+    inverseJoinColumn: {
+      name: 'id_simulation',
+    },
+  })
   scenario: Scenario[];
 
   @ManyToOne(() => AnimalSpecies, (as) => as.simulation)

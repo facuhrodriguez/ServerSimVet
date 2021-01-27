@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  JoinColumn,
   OneToMany,
 } from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
@@ -25,18 +26,40 @@ export class Scenario extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Pathology)
-  @JoinTable({ name: 'patologyperscenario' })
+  @JoinTable({
+    name: 'pathologyperscenario',
+    joinColumn: {
+      name: 'id_scenario',
+    },
+    inverseJoinColumn: { name: 'id_pat' },
+  })
   pathologies: Pathology[];
 
   @ManyToMany(() => Arrhythmia)
-  @JoinTable({ name: 'arrhythmiaperscenario' })
+  @JoinTable({
+    name: 'arrhythmiaperscenario',
+    joinColumn: {
+      name: 'id_arr',
+    },
+    inverseJoinColumn: {
+      name: 'id_scenario',
+    },
+  })
   arrhythmias: Arrhythmia[];
 
   @OneToMany(() => MperScenario, (ms) => ms.scenario)
   mPerScenario: MperScenario[];
 
   @ManyToMany(() => Simulation)
-  @JoinTable({ name: 'scenariopersimulation' })
+  @JoinTable({
+    name: 'scenariopersimulation',
+    joinColumn: {
+      name: 'id_simulation',
+    },
+    inverseJoinColumn: {
+      name: 'id_scenario',
+    },
+  })
   simulations: Simulation[];
 
   @OneToMany(() => Spp, (spp) => spp.scenario)

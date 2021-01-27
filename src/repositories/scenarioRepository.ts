@@ -15,11 +15,11 @@ export class ScenarioRepository {
     let result: any = await getManager()
       .getRepository(Scenario)
       .createQueryBuilder('s')
-      .innerJoinAndSelect('s.simulations', 'sim')
-      .innerJoinAndSelect('s.arrhythmias', 'arr')
-      .innerJoinAndSelect('s.pathologies', 'pat')
-      .innerJoinAndSelect('s.mPerScenario', 'med')
-      .innerJoinAndSelect('med.medication', 'medication')
+      .leftJoinAndSelect('s.simulations', 'sim')
+      .leftJoinAndSelect('s.arrhythmias', 'arr')
+      .leftJoinAndSelect('s.pathologies', 'pat')
+      .leftJoinAndSelect('s.mPerScenario', 'med')
+      .leftJoinAndSelect('med.medication', 'medication')
       .where(query)
       .orderBy(orderBy, order)
       .paginate(limit);
@@ -28,6 +28,18 @@ export class ScenarioRepository {
     //   result = await result.where(query).orderBy(orderBy, order);
     // }
     return result;
+  }
+
+  static async findById(id: number) {
+    return getManager()
+      .getRepository(Scenario)
+      .createQueryBuilder('s')
+      .leftJoinAndSelect('s.simulations', 'sim')
+      .leftJoinAndSelect('s.arrhythmias', 'arr')
+      .leftJoinAndSelect('s.pathologies', 'pat')
+      .leftJoinAndSelect('s.mPerScenario', 'med')
+      .leftJoinAndSelect('med.medication', 'medication')
+      .where({ 's.id': id });
   }
 
   static async deleteById(id: number) {
