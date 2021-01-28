@@ -8,6 +8,8 @@ import {
   JoinTable,
   PrimaryGeneratedColumn,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Scenario } from './scenario';
 
@@ -37,4 +39,10 @@ export class Simulation extends BaseEntity {
   @ManyToOne(() => AnimalSpecies, (as) => as.simulation)
   @JoinColumn({ name: 'id_as' })
   animalSpecie: AnimalSpecies;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

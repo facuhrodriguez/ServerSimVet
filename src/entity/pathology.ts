@@ -6,6 +6,7 @@ import {
   JoinTable,
   PrimaryGeneratedColumn,
   JoinColumn,
+  CreateDateColumn,
 } from 'typeorm';
 import { Scenario } from './scenario';
 
@@ -31,4 +32,10 @@ export class Pathology extends BaseEntity {
     },
   })
   scenario: Scenario[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

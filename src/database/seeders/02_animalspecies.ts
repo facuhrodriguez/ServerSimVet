@@ -2,7 +2,7 @@ import { AnimalSpecies } from '../../entity/animalSpecies';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 
-export default class CreateUsers implements Seeder {
+export default class CreateAnimalSpecies implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()

@@ -1,4 +1,11 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 import { Medication } from './medication';
 import { Pathology } from './pathology';
 import { PPperAs } from './ppPerAs';
@@ -23,4 +30,10 @@ export class PhysiologicalParameter extends BaseEntity {
 
   @OneToMany(() => PPperAs, (pp) => pp.animalSpecie)
   ppPerAs: PPperAs[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

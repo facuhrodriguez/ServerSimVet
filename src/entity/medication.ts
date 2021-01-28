@@ -7,6 +7,8 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
+  CreateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { Scenario } from './scenario';
 
@@ -22,5 +24,12 @@ export class Medication extends BaseEntity {
   description: string;
 
   @OneToMany(() => MperScenario, (mperScenario) => mperScenario.medication)
+  @JoinColumn({ name: 'id_scenario' })
   scenarios: Scenario[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Entity, Column, ManyToOne, PrimaryColumn, CreateDateColumn } from 'typeorm';
 
 import { Spp } from './spp';
 
@@ -12,4 +12,10 @@ export class PCurve extends BaseEntity {
 
   @Column({ type: 'numeric' })
   value: number;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

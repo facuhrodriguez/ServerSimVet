@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToOne,
   PrimaryColumn,
+  CreateDateColumn,
 } from 'typeorm';
 import { PhysiologicalParameter } from './physiologicalParameter';
 import { Spp } from './spp';
@@ -28,4 +29,10 @@ export class PPperAs extends BaseEntity {
 
   @OneToMany(() => Spp, (spp) => spp.ppPerAs)
   spp: Spp[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

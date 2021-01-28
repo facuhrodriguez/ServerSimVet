@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   PrimaryColumn,
+  CreateDateColumn,
 } from 'typeorm';
 import { User } from './user';
 
@@ -28,4 +29,10 @@ export class Role extends BaseEntity {
     },
   })
   users: User;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

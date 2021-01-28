@@ -1,5 +1,13 @@
 import { type } from 'os';
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  Column,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+} from 'typeorm';
 import { Scenario } from './scenario';
 
 @Entity('arrhytmia')
@@ -24,4 +32,10 @@ export class Arrhythmia extends BaseEntity {
     },
   })
   scenarios: Scenario[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

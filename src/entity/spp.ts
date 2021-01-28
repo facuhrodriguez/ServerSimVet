@@ -1,4 +1,12 @@
-import { BaseEntity, Entity, Column, ManyToOne, PrimaryColumn, OneToMany } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  Column,
+  ManyToOne,
+  PrimaryColumn,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 import { PCurve } from './pcurve';
 import { PPperAs } from './ppPerAs';
 import { Scenario } from './scenario';
@@ -16,4 +24,10 @@ export class Spp extends BaseEntity {
 
   @OneToMany(() => PCurve, (pcurve) => pcurve.spp)
   pCurve: PCurve[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

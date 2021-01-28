@@ -10,6 +10,7 @@ import {
   JoinTable,
   JoinColumn,
   OneToMany,
+  CreateDateColumn,
 } from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
 import { Spp } from './spp';
@@ -64,4 +65,10 @@ export class Scenario extends BaseEntity {
 
   @OneToMany(() => Spp, (spp) => spp.scenario)
   spp: Spp[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }

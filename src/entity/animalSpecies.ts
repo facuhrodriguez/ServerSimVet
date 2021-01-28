@@ -1,6 +1,14 @@
 import { Simulation } from './simulation';
 import { PPperAs } from './ppPerAs';
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('animalspecies')
 export class AnimalSpecies extends BaseEntity {
@@ -18,4 +26,10 @@ export class AnimalSpecies extends BaseEntity {
 
   @OneToMany(() => Simulation, (sim) => sim.animalSpecie)
   simulation: Simulation[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

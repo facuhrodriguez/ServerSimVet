@@ -7,6 +7,7 @@ import {
   ManyToMany,
   JoinTable,
   BeforeInsert,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
@@ -43,6 +44,12 @@ export class User extends BaseEntity {
     },
   })
   roles: Role[];
+
+  @UpdateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 
   @BeforeInsert()
   async setPassword(password: string) {
