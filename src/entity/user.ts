@@ -12,8 +12,8 @@ import {
 
 import * as bcrypt from 'bcrypt';
 import { Role } from './role';
-import { environment } from '../env/enviroment';
-@Entity('User')
+import { environment } from '../env/environment';
+@Entity('User', { schema: `${environment.DB.SCHEMA}` })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_user: number;
@@ -22,7 +22,7 @@ export class User extends BaseEntity {
   email: string;
 
   @Column({ type: 'varchar' })
-  name: any;
+  name: string;
 
   @Column({ type: 'varchar' })
   surname: string;

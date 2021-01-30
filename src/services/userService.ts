@@ -1,5 +1,5 @@
 import { UserI } from './../interfaces/userI';
-import { environment } from './../env/enviroment';
+import { environment } from './../env/environment';
 import { UserRepository } from '../repositories/userRepository';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';

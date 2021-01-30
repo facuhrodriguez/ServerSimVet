@@ -1,3 +1,4 @@
+import { environment } from './../env/environment';
 import { Simulation } from './simulation';
 import { PPperAs } from './ppPerAs';
 import {
@@ -10,7 +11,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('animalspecies')
+@Entity('animalspecies', { schema: `${environment.DB.SCHEMA}` })
 export class AnimalSpecies extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_as: number;

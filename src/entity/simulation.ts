@@ -12,8 +12,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Scenario } from './scenario';
+import { environment } from '../env/environment';
 
-@Entity('simulation')
+@Entity('simulation', { schema: `${environment.DB.SCHEMA}` })
 export class Simulation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_simulation: number;

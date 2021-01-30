@@ -1,3 +1,4 @@
+import { environment } from '../env/environment';
 import {
   BaseEntity,
   Entity,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 import { Scenario } from './scenario';
 
-@Entity('patology')
+@Entity('patology', { schema: `${environment.DB.SCHEMA}` })
 export class Pathology extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_pat: number;

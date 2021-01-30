@@ -1,8 +1,9 @@
+import { environment } from '../env/environment';
 import { BaseEntity, Entity, Column, ManyToOne, PrimaryColumn, CreateDateColumn } from 'typeorm';
 
 import { Spp } from './spp';
 
-@Entity('pcurve')
+@Entity('pcurve', { schema: `${environment.DB.SCHEMA}` })
 export class PCurve extends BaseEntity {
   @ManyToOne(() => Spp, (spp) => spp.pCurve, { primary: true })
   spp: Spp;

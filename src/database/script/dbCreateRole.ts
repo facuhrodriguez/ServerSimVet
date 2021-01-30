@@ -1,14 +1,14 @@
+import { environment } from './../../env/environment';
 import { exec } from 'child_process';
-import { environment } from '../../env/enviroment';
 
 const superuser = 'postgres';
-const user = environment.USER_POSTGRE;
-const pass = environment.PASSWORD_POSTGRE;
-const dbName = environment.DATABASE_POSTGRE;
+const user = environment.DB.USER;
+const pass = environment.DB.PASSWORD;
+const dbName = environment.DB.NAME;
 
 exec(
   `docker exec postgres-simvet psql -U ${superuser} -c "CREATE ROLE ${user} WITH CREATEDB LOGIN PASSWORD '${pass}';"`,
-  (err, stdout, stderr) => {
+  (err: any, stdout: any, stderr: any) => {
     if (err) {
       console.log(`error: ${err.message}`);
       return;
@@ -19,7 +19,7 @@ exec(
     }
 
     exec(
-      `docker exec postgres-simvet psql -U ${superuser} -c "GRANT ALL PRIVILEGES ON DATABASE ${dbName} TO GROUP ${user} WITH GRANT OPTION;"`,
+      `docker exec postgres-simvet psql --username ${superuser} -c "GRANT ALL PRIVILEGES ON DATABASE ${dbName} TO GROUP ${user} WITH GRANT OPTION;"`,
       (err2, stdout2, stderr2) => {
         if (err2) {
           console.log(`error: ${err2.message}`);

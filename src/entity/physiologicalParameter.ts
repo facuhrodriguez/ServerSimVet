@@ -1,3 +1,4 @@
+import { environment } from '../env/environment';
 import {
   BaseEntity,
   Entity,
@@ -11,7 +12,7 @@ import { Pathology } from './pathology';
 import { PPperAs } from './ppPerAs';
 import { Scenario } from './scenario';
 
-@Entity('physiologicalparameter')
+@Entity('physiologicalparameter', { schema: `${environment.DB.SCHEMA}` })
 export class PhysiologicalParameter extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_pp: number;

@@ -1,3 +1,4 @@
+import { environment } from '../env/environment';
 import {
   BaseEntity,
   Entity,
@@ -12,7 +13,7 @@ import {
 import { Medication } from './medication';
 import { Scenario } from './scenario';
 
-@Entity('mperscenario')
+@Entity('mperscenario', { schema: `${environment.DB.SCHEMA}` })
 export class MperScenario extends BaseEntity {
   @Column({ type: 'numeric' })
   dose: number;

@@ -13,7 +13,8 @@ import {
 } from 'typeorm';
 import { PhysiologicalParameter } from './physiologicalParameter';
 import { Spp } from './spp';
-@Entity('ppperas')
+import { environment } from '../env/environment';
+@Entity('ppperas', { schema: `${environment.DB.SCHEMA}` })
 export class PPperAs extends BaseEntity {
   @ManyToOne(() => AnimalSpecies, (as) => as.ppPerAs, { primary: true })
   animalSpecie: AnimalSpecies;

@@ -11,8 +11,9 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Scenario } from './scenario';
+import { environment } from '../env/environment';
 
-@Entity('medication')
+@Entity('medication', { schema: `${environment.DB.SCHEMA}` })
 export class Medication extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_medication: number;

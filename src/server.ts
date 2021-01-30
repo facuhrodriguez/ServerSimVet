@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import app from './app';
-import { environment } from './env/enviroment';
+import { environment } from './env/environment';
 import { authentication } from './middleware/authentication';
 // Allow any method from any host and log requests
 app.use((req: Request, res: Response, next: NextFunction) => {

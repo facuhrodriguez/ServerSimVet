@@ -17,13 +17,3 @@ DatabaseConfig.connection()
     console.log(err);
     return;
   });
-
-// db.then((_db) => {
-//     _db.query(`CREATE DATABASE simvet WITH ENCODING 'UTF-8'`)
-//         .then(() => {
-//             console.log("Database simvet created")
-//         })
-//         .catch((err: any) => {
-//             console.log(err.message);
-//         });
-//     });

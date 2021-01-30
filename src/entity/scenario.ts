@@ -14,8 +14,9 @@ import {
 } from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
 import { Spp } from './spp';
+import { environment } from '../env/environment';
 
-@Entity('scenario')
+@Entity('scenario', { schema: `${environment.DB.SCHEMA}` })
 export class Scenario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_scenario: number;

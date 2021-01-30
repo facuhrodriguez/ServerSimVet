@@ -1,3 +1,4 @@
+import { environment } from '../env/environment';
 import {
   BaseEntity,
   Entity,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 import { User } from './user';
 
-@Entity('role')
+@Entity('role', { schema: `${environment.DB.SCHEMA}` })
 export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_role: number;

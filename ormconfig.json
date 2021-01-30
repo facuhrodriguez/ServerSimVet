@@ -1,9 +1,9 @@
 {
   "type": "postgres",
   "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "facundo95",
+  "port": 5434,
+  "username": "simvet_user",
+  "password": "simvet",
   "database": "postgres",
   "entities": ["src/entity/*.ts"],
   "migrations": ["src/database/migrations/*.ts"],

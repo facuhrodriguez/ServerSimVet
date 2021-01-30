@@ -1,3 +1,4 @@
+import { environment } from '../env/environment';
 import {
   BaseEntity,
   Entity,
@@ -11,7 +12,7 @@ import { PCurve } from './pcurve';
 import { PPperAs } from './ppPerAs';
 import { Scenario } from './scenario';
 
-@Entity('spp')
+@Entity('spp', { schema: `${environment.DB.SCHEMA}` })
 export class Spp extends BaseEntity {
   @ManyToOne(() => PPperAs, (pp) => pp.spp, { primary: true })
   ppPerAs: PPperAs;
