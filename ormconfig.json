@@ -10,7 +10,7 @@
   "seeds": ["src/database/seeders/*"],
   "factories": ["src/database/factories/*"],
   "synchronize": true,
-  "logging": ["error", "query"],
+  "logging": ["error"],
   "cli": {
     "entitiesDir": "src/entity/*.ts",
     "migrationsDir": "migrations"

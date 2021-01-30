@@ -49,6 +49,7 @@ export class UserService {
           if (user) {
             const result = UserService.comparePassword(password, user.password);
             const expiresIn: number = 24 * 60 * 60;
+
             if (result) {
               const access_token = jwt.sign({ id: user.id_user }, SECRET_KEY);
               // TODO: Insertar la sesión en la tabla session.
@@ -59,10 +60,10 @@ export class UserService {
                 expiresIn,
               });
             } else {
-              reject(new Error('Internal error'));
+              reject({ status: 412, msg: 'Invalid password' });
             }
           } else {
-            reject(new Error(`User doesn't exist`));
+            reject({ status: 412, msg: 'Invalid email' });
           }
         })
         .catch((err) => {

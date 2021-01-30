@@ -6,7 +6,7 @@ import { LoginI } from '../interfaces/loginI';
 export class UserController {
   public async login(req: Request, res: Response, next: NextFunction) {
     let userData: LoginI;
-    console.log('afs');
+
     userData = {
       email: req.body.email,
       password: req.body.password,
@@ -17,7 +17,8 @@ export class UserController {
         return res.status(200).json(user);
       })
       .catch((err) => {
-        next(err);
+        // next(err);
+        return res.status(err.status).json(err.msg);
       });
   }
 
