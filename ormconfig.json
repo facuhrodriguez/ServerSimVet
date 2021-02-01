@@ -9,7 +9,6 @@
   "migrations": ["src/database/migrations/*.ts"],
   "seeds": ["src/database/seeders/*"],
   "factories": ["src/database/factories/*"],
-  "synchronize": true,
   "logging": ["error"],
   "cli": {
     "entitiesDir": "src/entity/*.ts",
