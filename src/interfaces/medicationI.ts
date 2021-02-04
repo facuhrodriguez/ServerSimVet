@@ -1,5 +1,5 @@
 export interface MedicationI {
-  id_med?: number;
+  id_medication?: number;
   name: string;
   description: string;
 }

@@ -1,15 +1,8 @@
+import { Scenario } from './scenario';
 import { PhysiologicalParameter } from './physiologicalParameter';
 import { AnimalSpecies } from './animalSpecies';
 import { environment } from '../env/environment';
-import {
-  BaseEntity,
-  Entity,
-  Column,
-  ManyToOne,
-  PrimaryColumn,
-  CreateDateColumn,
-  JoinColumn,
-} from 'typeorm';
+import { BaseEntity, Entity, Column, ManyToOne, CreateDateColumn, JoinColumn } from 'typeorm';
 
 import { Spp } from './spp';
 
@@ -22,6 +15,10 @@ export class PCurve extends BaseEntity {
   @ManyToOne(() => Spp, (spp) => spp.physiologicalParameter, { primary: true })
   @JoinColumn({ name: 'id_pp' })
   physiologicalParameter: PhysiologicalParameter;
+
+  @ManyToOne(() => Spp, (spp) => spp.scenario, { primary: true })
+  @JoinColumn({ name: 'id_scenario' })
+  scenario: Scenario;
 
   @Column({ type: 'numeric', primary: true })
   t: number;

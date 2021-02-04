@@ -2,7 +2,7 @@ import { Pathology } from '../../entity/pathology';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 
-export default class CreatePathologies implements Seeder {
+export default class CreateScenarios implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
@@ -16,11 +16,7 @@ export default class CreatePathologies implements Seeder {
         },
         {
           name: 'Bovine viral diarrhoea virus',
-          description: 'Virus bovine',
-        },
-        {
-          name: 'Caprine arthritis encephalitis',
-          description: ' VIRUS ARN',
+          description: 'Virus Bovine',
         },
       ])
       .execute();

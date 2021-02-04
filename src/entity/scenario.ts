@@ -50,7 +50,7 @@ export class Scenario extends BaseEntity {
   arrhythmias: Arrhythmia[];
 
   @OneToMany(() => MperScenario, (ms) => ms.scenario)
-  mPerScenario: MperScenario[];
+  medications: MperScenario[];
 
   @ManyToMany(() => Simulation)
   @JoinTable({

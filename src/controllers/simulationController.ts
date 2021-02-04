@@ -24,7 +24,8 @@ export class SimulationController {
     let simulationData = {
       name: req.body?.name,
       description: req.body?.description,
-      id_as: req.body?.id_as,
+      animalSpecie: req.body?.animalSpecie,
+      scenarios: req.body?.scenarios,
     };
 
     SimulationService.create(simulationData)

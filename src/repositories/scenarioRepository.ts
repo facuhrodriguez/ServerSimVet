@@ -1,9 +1,12 @@
+import { Medication } from './../entity/medication';
+import { MedicationI } from './../interfaces/medicationI';
+import { MperScenario } from './../entity/mPerScenario';
 import { Scenario } from '../entity/scenario';
 import { getManager, EntityManager, ObjectID } from 'typeorm';
 
 export class ScenarioRepository {
   static async create(scenario: any) {
-    return await getManager().getRepository(Scenario).save(scenario);
+    await getManager().getRepository(Scenario).save(scenario);
   }
 
   static async findAll(
@@ -18,7 +21,7 @@ export class ScenarioRepository {
       .leftJoinAndSelect('s.simulations', 'sim')
       .leftJoinAndSelect('s.arrhythmias', 'arr')
       .leftJoinAndSelect('s.pathologies', 'pat')
-      .leftJoinAndSelect('s.mPerScenario', 'med')
+      .leftJoinAndSelect('s.medications', 'med')
       .leftJoinAndSelect('med.medication', 'medication')
       .where(query)
       .orderBy(orderBy, order)
@@ -52,5 +55,23 @@ export class ScenarioRepository {
       .returning('*')
       .updateEntity(true)
       .execute();
+  }
+
+  static async saveArrhythmias(id_scenario: number, arrhythmias: any) {
+    return await getManager()
+      .getRepository(Scenario)
+      .createQueryBuilder()
+      .relation(Scenario, 'arrhythmias')
+      .of(arrhythmias)
+      .add(id_scenario);
+  }
+
+  static async savePathologies(id_scenario: number, pathology: any) {
+    return await getManager()
+      .getRepository(Scenario)
+      .createQueryBuilder()
+      .relation(Scenario, 'pathologies')
+      .of(id_scenario)
+      .add(pathology);
   }
 }

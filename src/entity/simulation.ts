@@ -35,7 +35,7 @@ export class Simulation extends BaseEntity {
       name: 'id_simulation',
     },
   })
-  scenario: Scenario[];
+  scenarios: Scenario[];
 
   @ManyToOne(() => AnimalSpecies, (as) => as.simulation)
   @JoinColumn({ name: 'id_as' })

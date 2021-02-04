@@ -25,9 +25,9 @@ export class MperScenario extends BaseEntity {
   @JoinColumn({ name: 'id_medication' })
   medication: Medication;
 
-  @ManyToOne(() => Scenario, (scenario) => scenario.mPerScenario, { primary: true })
+  @ManyToOne(() => Scenario, (scenario) => scenario.medications, { primary: true })
   @JoinColumn({ name: 'id_scenario' })
-  scenario: Scenario[];
+  scenario: Scenario;
 
   @CreateDateColumn()
   created_at: Date;

@@ -4,10 +4,14 @@ import { Response, Request, NextFunction } from 'express';
 
 export class ScenarioController {
   public create(req: Request, res: Response, next: NextFunction) {
-    const scenario: ScenarioI = {
+    const scenario = {
       name: req.body.name,
       description: req.body?.description,
+      arrhythmias: req.body?.arrhythmias,
+      medications: req.body?.medications,
+      pathologies: req.body?.pathologies,
     };
+
     ScenarioService.create(scenario)
       .then((data: any) => {
         return res.status(200).json(data);
@@ -60,6 +64,26 @@ export class ScenarioController {
       })
       .catch((err) => {
         next(err);
+      });
+  }
+
+  public saveArrhythmias(req: Request, res: Response) {
+    ScenarioService.saveArrhythmias(req.body.id_scenario, req.body.arrhythmias)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        return res.status(500).json(err);
+      });
+  }
+
+  public savePathologies(req: Request, res: Response) {
+    ScenarioService.savePathologies(req.body.id_scenario, req.body.pathologies)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        return res.status(500).json(err);
       });
   }
 }
