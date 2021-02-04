@@ -1,59 +1,65 @@
 import { ArrhythmiaI } from '@interfaces/arrhythmiaI';
 import { Request, Response, NextFunction } from 'express';
-import * as arrythmiaModel from "../models/arrhythmia";
+import { ArrhythmiaService } from '../services/arrhythmiaService';
 
 export class ArrhythmiaController {
-    public insert(req: Request, res: Response, next: NextFunction) {
-        const arr : ArrhythmiaI = {
-            name : req.body.name,
-            description : req.body.description
-        };
-        arrythmiaModel
-            .insert(arr)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            });
-    }
+  public findAll(req: Request, res: Response, next: NextFunction) {
+    let query = {
+      name: req.query?.name,
+      description: req.query?.description,
+    };
+    const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
+    const order = req.query.order ? req.query.order : 'ASC';
+    const limit: number = req.query.limit ? parseInt(req.query.limit.toString()) : 10;
+    ArrhythmiaService.findAll(query, order, orderBy, limit)
+      .then((arrhythmias) => {
+        return res.status(200).json(arrhythmias);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 
-    public get (req: Request, res: Response, next: NextFunction) {
-        arrythmiaModel
-            .get()
-            .then( data => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            });
-    }
+  public insert(req: Request, res: Response, next: NextFunction) {
+    const arr: ArrhythmiaI = {
+      name: req.body.name,
+      description: req.body.description,
+    };
+    ArrhythmiaService.create(arr)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 
-    public update (req: Request, res: Response, next: NextFunction) {
-        const id_arr : number = parseInt(req.params.id_arr);
-        const arr : ArrhythmiaI = req.body;
-        if ( !arr) {
-            next(new Error());
-        }
-        arrythmiaModel
-            .update(id_arr, arr)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            });
-    }
+  public updateById(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
 
-    public delete (req : Request, res : Response, next : NextFunction) {
-        const id_arr : number = parseInt(req.params.id_arr);
-        arrythmiaModel
-            .remove(id_arr)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            });
-    }
+    const arrhythmiaData: ArrhythmiaI = {
+      name: req.body?.name,
+      description: req.body?.description,
+    };
+
+    ArrhythmiaService.updateById(id, arrhythmiaData)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+
+  public delete(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
+
+    ArrhythmiaService.deleteById(id)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 }

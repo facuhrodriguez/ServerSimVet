@@ -1,11 +1,15 @@
-import { environment } from "../env/enviroment";
-// const { Pool } = require("pg");
+import { createConnection, getConnection } from 'typeorm';
 
-import { Pool } from "pg";
-export const connection =  new Pool({
-    user: environment.USER_POSTGRE,
-    host: environment.HOST_POSTGRE,
-    database: environment.DATABASE_POSTGRE,
-    password: environment.PASSWORD_POSTGRE,
-    port: environment.PORT_POSTGRE,
-});
+export class DatabaseConfig {
+  static async connection() {
+    try {
+      await createConnection();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static getconnection() {
+    return getConnection();
+  }
+}

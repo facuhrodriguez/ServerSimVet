@@ -1,54 +1,66 @@
 import { MedicationI } from '../interfaces/medicationI';
 import { Request, Response, NextFunction } from 'express';
-import * as medicationModel from "../models/medication";
+import { MedicationService } from '../services/medicationService';
 
 export class MedicationController {
-    public insert (req : Request, res : Response, next: NextFunction) {
-        const med : MedicationI = req.body;
-        medicationModel
-            .insert(med)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch((err:any)=> {
-                next(err);
-            });
-    }
+  public create(req: Request, res: Response, next: NextFunction) {
+    const med: MedicationI = {
+      name: req.body.name,
+      description: req.body?.description,
+    };
 
-    public get (req : Request, res: Response, next : NextFunction) {
-        medicationModel
-            .get()
-            .then(data => {
-                return res.status(200).send(data);
-            })
-            .catch(err => {
-                next(err);
-            });
-    }
+    MedicationService.create(med)
+      .then((medication) => {
+        return res.status(200).json(medication);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 
-    public delete (req: Request, res: Response, next: NextFunction) {
-        const id_med = parseInt(req.params.id_med);
-        medicationModel
-            .remove(id_med)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            })
-    }
+  public findAll(req: Request, res: Response, next: NextFunction) {
+    let query = {
+      name: req.query?.name,
+      description: req.query?.description,
+    };
+    const orderBy = req.query.orderBy ? req.query.orderBy : 'name';
+    const order = req.query.order ? req.query.order : 'ASC';
+    const limit: number = Number(req.query.limit);
+    MedicationService.findAll(query, orderBy, order, limit)
+      .then((medications) => {
+        return res.status(200).json(medications);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 
-    public update (req : Request, res : Response, next : NextFunction) {
-        const id_med :number= parseInt(req.params.id_med);
-        const med : MedicationI = req.body;
-        medicationModel
-            .update(id_med, med)
-            .then( (data) => {
-                return res.status(200).json(data);
-            })
-            .catch( err => {
-                next(err);
-            })
-    }
+  public updateById(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
 
+    const medicationData: MedicationI = {
+      name: req.body?.name,
+      description: req.body?.description,
+    };
+
+    MedicationService.updateById(id, medicationData)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+
+  public delete(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
+
+    MedicationService.deleteById(id)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 }

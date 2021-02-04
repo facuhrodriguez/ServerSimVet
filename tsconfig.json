@@ -5,27 +5,25 @@
     "resolveJsonModule": true,
     "module": "commonjs",
     "esModuleInterop": true,
+    "strict": false,
     "target": "es6",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "rootDir": "./src",
     "outDir": "dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      
-      "@env/*": [ "src/env/*"],
-      "@database/*": [ "src/database/*" ],
+      "@env/*": ["src/env/*"],
+      "@database/*": ["src/database/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@models/*":["src/models/*"],
-      "@errors/*":["src/errors/*"],
-      "../controllers/*":["src/controllers/*"],
-      "@middleware/*":["src/middleware/*"],
-      "@routes/*":["src/routes/*"]
+      "@entities/*": ["src/entities/*"],
+      "@errors/*": ["src/errors/*"],
+      "../controllers/*": ["src/controllers/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@routes/*": ["src/routes/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

@@ -1,14 +1,17 @@
 import { Router } from 'express';
-import { AnimalSpeciesController } from "../controllers/animalSpeciesController";
-import { isAuth } from "../middleware/auth";
+import { AnimalSpeciesController } from '../controllers/animalSpeciesController';
+import { isAuth } from '../middleware/auth';
 
-const animalSpeciesController : AnimalSpeciesController = new AnimalSpeciesController();
-const router : Router = Router();
-router.route('')
-    .post(isAuth, animalSpeciesController.insert)
-    .get(isAuth, animalSpeciesController.get);
-router.route('/:id_as')
-    .delete(isAuth, animalSpeciesController.delete)
-    .put(isAuth, animalSpeciesController.update);
+const animalSpeciesController: AnimalSpeciesController = new AnimalSpeciesController();
+const router: Router = Router();
+router
+  .route('')
+  .post(isAuth, animalSpeciesController.create)
+  .get(isAuth, animalSpeciesController.findAll);
 
-export const AnimalSpeciesRoutes : Router = router;
+router
+  .route('/:id')
+  .delete(isAuth, animalSpeciesController.delete)
+  .put(isAuth, animalSpeciesController.updateById);
+
+export const AnimalSpeciesRoutes: Router = router;

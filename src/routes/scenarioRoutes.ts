@@ -1,16 +1,23 @@
+import { MPerScenarioController } from './../controllers/mPerScenarioController';
 import { ScenarioController } from '../controllers/ScenarioController';
 import { Router } from 'express';
-import { isAuth } from "../middleware/auth";
+import { isAuth } from '../middleware/auth';
 
-const scenarioController : ScenarioController = new ScenarioController();
-const router : Router = Router();
+const scenarioController: ScenarioController = new ScenarioController();
+const mPerScenario: MPerScenarioController = new MPerScenarioController();
 
-router.route('')
-    .post(isAuth, scenarioController.insert)
-    .get(isAuth, scenarioController.get);
+const router: Router = Router();
 
-router.route('/:id_scenario')
-    .put(isAuth, scenarioController.update)
-    .delete(isAuth, scenarioController.delete)
+router.route('').post(isAuth, scenarioController.create).get(isAuth, scenarioController.findAll);
 
-export const ScenarioRoutes : Router = router;
+router.route('/medication').post(isAuth, mPerScenario.create);
+
+router.route('/arrhythmias').post(isAuth, scenarioController.saveArrhythmias);
+
+router.route('/pathologies').post(isAuth, scenarioController.savePathologies);
+router
+  .route('/:id')
+  .put(isAuth, scenarioController.updateById)
+  .delete(isAuth, scenarioController.delete);
+
+export const ScenarioRoutes: Router = router;

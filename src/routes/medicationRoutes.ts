@@ -1,17 +1,15 @@
 import { Router } from 'express';
-import { MedicationController } from "../controllers/medicationController";
-import { isAuth } from "../middleware/auth";
+import { MedicationController } from '../controllers/medicationController';
+import { isAuth } from '../middleware/auth';
 
+const medicationController: MedicationController = new MedicationController();
+const router: Router = Router();
 
-const medicationController : MedicationController = new MedicationController();
-const router : Router = Router();
+router.route('').post(isAuth, medicationController.create).get(medicationController.findAll);
 
-router.route('')
-    .post(isAuth, medicationController.insert)
-    .get(isAuth, medicationController.get);
+router
+  .route('/:id')
+  .delete(isAuth, medicationController.delete)
+  .put(isAuth, medicationController.updateById);
 
-router.route('/:id_med')
-    .delete(isAuth, medicationController.delete)
-    .put(isAuth, medicationController.update);
-
-export const MedicationRoutes : Router = router;
+export const MedicationRoutes: Router = router;
