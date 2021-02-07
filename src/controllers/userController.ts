@@ -3,6 +3,8 @@ import { UserService } from './../services/userService';
 import { Request, Response, NextFunction } from 'express';
 import { LoginI } from '../interfaces/loginI';
 
+
+
 export class UserController {
   public async login(req: Request, res: Response, next: NextFunction) {
     let userData: LoginI;
@@ -20,6 +22,21 @@ export class UserController {
         // next(err);
         return res.status(err.status).json(err.msg);
       });
+  }
+  public async user (req: Request, res: Response, next: NextFunction){
+   let userEmail = req.params.email;
+   let query = {
+     email: req.query?.email,
+     id_user: req.query?.id_user
+   }
+
+    UserService.findOneByEmail(query.email)
+        .then((user)=> {
+          return res.status(200).json(user);
+        })
+        .catch((err)=>{
+          return res.status(err.status).json(err.msg);
+        })
   }
 
   /**
