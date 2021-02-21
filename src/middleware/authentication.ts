@@ -12,7 +12,7 @@ export const authentication = async (req: Request, res: Response, next: NextFunc
       jwtToken = req.headers.authorization.split(' ')[1];
     else if (req.query && req.query.access_token) jwtToken = req.query.access_token.toString();
 
-    // Process JWT token (internal)
+    // Process JWT token
     if (jwtToken) {
       jwt.verify(jwtToken, process.env.JWT_SECRET, (err, decode: any) => {
         if (err) {

@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
 let handleError = (err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log('Holas');
   let errorObject;
 
   if (typeof err.toJson === 'function') {

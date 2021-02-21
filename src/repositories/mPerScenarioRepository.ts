@@ -14,7 +14,7 @@ export class MPerScenarioRepository {
     _data.unit = data.unit;
     _data.medication = medication;
     _data.scenario = scenario;
-    console.log(_data);
+
     return getManager().getRepository(MperScenario).save(_data);
   }
 

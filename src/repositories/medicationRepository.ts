@@ -7,7 +7,6 @@ export class MedicationRepository {
   }
 
   static findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
-    console.log(query);
     return getManager()
       .getRepository(Medication)
       .createQueryBuilder()

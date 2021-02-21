@@ -41,10 +41,10 @@ export class Scenario extends BaseEntity {
   @JoinTable({
     name: 'arrhythmiaperscenario',
     joinColumn: {
-      name: 'id_arr',
+      name: 'id_scenario',
     },
     inverseJoinColumn: {
-      name: 'id_scenario',
+      name: 'id_arr',
     },
   })
   arrhythmias: Arrhythmia[];

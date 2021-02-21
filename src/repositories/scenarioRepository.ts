@@ -6,7 +6,14 @@ import { getManager, EntityManager, ObjectID } from 'typeorm';
 
 export class ScenarioRepository {
   static async create(scenario: any) {
-    await getManager().getRepository(Scenario).save(scenario);
+    return await getManager()
+      .getRepository(Scenario)
+      .createQueryBuilder()
+      .insert()
+      .into(Scenario)
+      .values(scenario)
+      .returning('*')
+      .execute();
   }
 
   static async findAll(

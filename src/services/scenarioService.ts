@@ -17,7 +17,7 @@ export class ScenarioService {
     return new Promise((resolve: any, reject: any) => {
       ScenarioRepository.create(scenarioData)
         .then((data) => {
-          resolve(data);
+          resolve(data.raw);
         })
         .catch((err) => {
           reject(err);
