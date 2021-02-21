@@ -10,4 +10,7 @@ router.route('/register').post(userController.register);
 // router.route('/:id_user').put(isAuth,userController.update);
 // router.route('/:id_user').delete(isAuth, userController.delete);
 
+router.route ('/user').get(userController.user);
+
+
 export const UserRoutes: Router = router;
