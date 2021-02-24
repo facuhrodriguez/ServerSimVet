@@ -6,14 +6,14 @@ import { getManager, EntityManager, ObjectID } from 'typeorm';
 
 export class ScenarioRepository {
   static async create(scenario: any) {
-    return await getManager()
-      .getRepository(Scenario)
-      .createQueryBuilder()
-      .insert()
-      .into(Scenario)
-      .values(scenario)
-      .returning('*')
-      .execute();
+    const newScenario: Scenario = new Scenario();
+    newScenario.name = scenario.name;
+    if (scenario.description) newScenario.description = scenario?.description;
+    if (scenario.pathologies) newScenario.pathologies = scenario.pathologies;
+    if (scenario.arrhythmias) newScenario.arrhythmias = scenario.arrhythmias;
+    if (scenario.medications) newScenario.medications = scenario.medications;
+
+    return await getManager().getRepository(Scenario).save(newScenario);
   }
 
   static async findAll(
