@@ -55,6 +55,6 @@ SimVet project Server
    "host": "localhost",
    "port": 5434,
    "username": "simvet_user",
-   "password": "simvet",
+   "password": "secret",
    "database": "postgres",
    "schema": "simvet"
