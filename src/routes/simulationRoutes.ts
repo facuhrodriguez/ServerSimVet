@@ -11,7 +11,7 @@ router
   .get(isAuth, simulationController.findAll);
 
 router
-  .route('/:id')
+  .route('/:id_simulation')
   .put(isAuth, simulationController.updateById)
   .delete(isAuth, simulationController.deleteById);
 

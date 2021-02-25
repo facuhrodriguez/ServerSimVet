@@ -52,7 +52,7 @@ export class Scenario extends BaseEntity {
   @OneToMany(() => MperScenario, (ms) => ms.scenario, { cascade: ['insert', 'update'] })
   medications: MperScenario[];
 
-  @ManyToMany(() => Simulation)
+  @ManyToMany(() => Simulation, { cascade: ['insert', 'update'] })
   @JoinTable({
     name: 'scenariopersimulation',
     joinColumn: {

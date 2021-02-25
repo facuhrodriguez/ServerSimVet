@@ -17,6 +17,7 @@ export class SimulationRepository {
       .getRepository(Simulation)
       .createQueryBuilder('simulation')
       .innerJoinAndSelect('simulation.animalSpecie', 'as')
+      .leftJoinAndSelect('simulation.scenarios', 'scenarios')
       .orderBy(orderBy, order)
       .paginate(limit);
 
@@ -37,13 +38,21 @@ export class SimulationRepository {
   }
 
   static async updateById(id: number, simulationData: any) {
-    return await getManager()
-      .getRepository(Simulation)
-      .createQueryBuilder()
-      .update(Simulation, simulationData)
-      .where({ id_simulation: id })
-      .returning('*')
-      .updateEntity(true)
-      .execute();
+    const simulation: Simulation = new Simulation();
+    simulation.id_simulation = id;
+    if (simulationData.name) simulation.name = simulationData.name;
+
+    if (simulationData.description) simulation.description = simulationData.description;
+    if (simulationData.scenarios) simulation.scenarios = simulationData.scenarios;
+    if (simulationData.animalSpecie) simulation.animalSpecie = simulationData.animalSpecie;
+    return await getManager().getRepository(Simulation).save(simulation);
+    // return await getManager()
+    //   .getRepository(Simulation)
+    //   .createQueryBuilder()
+    //   .update(Simulation, simulationData)
+    //   .where({ id_simulation: id })
+    //   .returning('*')
+    //   .updateEntity(true)
+    //   .execute();
   }
 }

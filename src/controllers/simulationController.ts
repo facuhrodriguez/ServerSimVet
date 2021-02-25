@@ -50,12 +50,13 @@ export class SimulationController {
   }
 
   public updateById(req: Request, res: Response, next: NextFunction) {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id_simulation);
 
     const simulationData = {
       name: req.body.name,
       description: req.body?.description,
-      id_as: req.body?.id_as,
+      animalSpecie: req.body?.animalSpecie,
+      scenarios: req.body?.scenarios,
     };
 
     SimulationService.update(id, simulationData)

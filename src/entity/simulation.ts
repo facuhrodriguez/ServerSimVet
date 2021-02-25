@@ -25,7 +25,7 @@ export class Simulation extends BaseEntity {
   @Column({ type: 'varchar' })
   description: string;
 
-  @ManyToMany(() => Scenario)
+  @ManyToMany(() => Scenario, { cascade: ['insert', 'update'] })
   @JoinTable({
     name: 'scenariopersimulation',
     joinColumn: {
@@ -37,7 +37,7 @@ export class Simulation extends BaseEntity {
   })
   scenarios: Scenario[];
 
-  @ManyToOne(() => AnimalSpecies, (as) => as.simulation)
+  @ManyToOne(() => AnimalSpecies, (as) => as.simulation, { cascade: ['insert', 'update'] })
   @JoinColumn({ name: 'id_as' })
   animalSpecie: AnimalSpecies;
 
