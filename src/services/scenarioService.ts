@@ -29,7 +29,7 @@ export class ScenarioService {
     return new Promise((resolve: any, reject: any) => {
       ScenarioRepository.updateById(id, scenarioData)
         .then((data) => {
-          resolve(data.raw);
+          resolve(data);
         })
         .catch((err) => {
           reject(err);
