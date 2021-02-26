@@ -19,4 +19,5 @@ export const environment = {
   PASSWORD_POSTGRE: process.env.PASSWORD_POSTGRE,
   API_URL: process.env.API_URL,
   SALT_PASSWORD: parseInt(process.env.SALT_PASSWORD),
+  JWT_SECRET: process.env.JWT_SECRET,
 };

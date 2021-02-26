@@ -18,6 +18,10 @@ export class SimulationRepository {
       .createQueryBuilder('simulation')
       .innerJoinAndSelect('simulation.animalSpecie', 'as')
       .leftJoinAndSelect('simulation.scenarios', 'scenarios')
+      .leftJoinAndSelect('scenarios.medications', 'medications')
+      .leftJoinAndSelect('medications.medication', 'medication')
+      .leftJoinAndSelect('scenarios.arrhythmias', 'arr')
+      .leftJoinAndSelect('scenarios.pathologies', 'pat')
       .orderBy(orderBy, order)
       .paginate(limit);
 

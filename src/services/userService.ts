@@ -42,13 +42,13 @@ export class UserService {
   }
 
   static login(email: string, password: string) {
-    const SECRET_KEY: string = 'justAnAwesomeSecret_';
+    const SECRET_KEY: string = environment.JWT_SECRET;
     return new Promise((resolve, reject) => {
       UserService.findOneByEmail(email)
         .then((user: UserI) => {
           if (user) {
             const result = UserService.comparePassword(password, user.password);
-            const expiresIn: number = 24 * 60 * 60;
+            const expiresIn: number = 100;
 
             if (result) {
               const access_token = jwt.sign({ id: user.id_user }, SECRET_KEY);
