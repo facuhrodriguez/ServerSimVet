@@ -9,6 +9,7 @@ export class SimulationRepository {
 
   static async findAll(
     query: any = null,
+    scenario: any = null,
     order: any = 'DESC',
     orderBy: any = 'simulation.name',
     limit: number = 20
@@ -22,9 +23,13 @@ export class SimulationRepository {
       .leftJoinAndSelect('medications.medication', 'medication')
       .leftJoinAndSelect('scenarios.arrhythmias', 'arr')
       .leftJoinAndSelect('scenarios.pathologies', 'pat')
-      .orderBy(orderBy, order)
-      .paginate(limit);
+      .where(query);
 
+    if (scenario) {
+      result = await result.andWhere(`scenarios.id_scenario = ${scenario}`);
+    }
+
+    result = await result.orderBy(orderBy, order).paginate(limit);
     // .orderBy(orderBy, order)
     // .paginate(limit);
 

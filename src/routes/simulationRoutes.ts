@@ -15,4 +15,8 @@ router
   .put(isAuth, simulationController.updateById)
   .delete(isAuth, simulationController.deleteById);
 
+router
+  .route('/scenarios/:id_scenario')
+  .get(isAuth, simulationController.getSimulationsFromScenario);
+
 export const SimulationRoutes: Router = router;

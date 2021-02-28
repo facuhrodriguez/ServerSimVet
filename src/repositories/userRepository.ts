@@ -1,4 +1,4 @@
-import { User } from '../entity/user';
+import { User } from './../entity/user';
 import { getManager } from 'typeorm';
 
 export class UserRepository {
@@ -7,15 +7,24 @@ export class UserRepository {
   }
 
   static async findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
-    return await getManager()
+    let result: any = await getManager()
       .getRepository(User)
       .createQueryBuilder()
       .where(query)
-      .orderBy(orderBy, order)
-      .paginate(limit);
+      .orderBy(orderBy, order);
+
+    result = result.paginate(limit);
+    return result;
   }
 
   static async findByEmail(email: any) {
-    return await getManager().getRepository(User).findOne({ email: email });
+    let result: any = await getManager()
+      .getRepository(User)
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.roles', 'roles')
+      .where({ email: email });
+
+    result = result.paginate(1);
+    return result;
   }
 }

@@ -4,14 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export class SimulationController {
   public findAll(req: Request, res: Response, next: NextFunction) {
-    let query = {
-      name: req.query?.name,
-      description: req.query?.description,
-    };
-    const orderBy = req.query.orderBy ? req.query.orderBy : 'simulation.name';
-    const order = req.query.order ? req.query.order : 'ASC';
-    const limit: number = req.query.limit ? parseInt(req.query.limit.toString()) : 10;
-    SimulationService.findAll(query, order, orderBy, limit)
+    SimulationService.findAll(req.query)
       .then((simulations) => {
         return res.status(200).json(simulations);
       })
@@ -65,6 +58,18 @@ export class SimulationController {
       })
       .catch((err) => {
         next(err);
+      });
+  }
+
+  public getSimulationsFromScenario(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id_scenario);
+
+    SimulationService.findAll({ scenario: id })
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((error: any) => {
+        return res.status(500).json(error);
       });
   }
 }

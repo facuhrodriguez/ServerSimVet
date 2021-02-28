@@ -29,7 +29,7 @@ export class UserService {
     });
   }
 
-  static findOneByEmail(email: any) {
+  static async findOneByEmail(email: any) {
     return new Promise((resolve: any, reject: any) => {
       UserRepository.findByEmail(email)
         .then((user) => {
@@ -45,17 +45,16 @@ export class UserService {
     const SECRET_KEY: string = environment.JWT_SECRET;
     return new Promise((resolve, reject) => {
       UserService.findOneByEmail(email)
-        .then((user: UserI) => {
+        .then(async (user: any) => {
           if (user) {
-            const result = UserService.comparePassword(password, user.password);
+            const result = await UserService.comparePassword(password, user.data[0].password);
             const expiresIn: number = 100;
-
+            console.log(result);
             if (result) {
               const access_token = jwt.sign({ id: user.id_user }, SECRET_KEY);
               // TODO: Insertar la sesión en la tabla session.
               resolve({
-                id_user: user.id_user,
-                email,
+                user: user.data[0],
                 access_token,
                 expiresIn,
               });

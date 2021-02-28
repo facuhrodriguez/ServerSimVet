@@ -29,10 +29,10 @@ export class Simulation extends BaseEntity {
   @JoinTable({
     name: 'scenariopersimulation',
     joinColumn: {
-      name: 'id_scenario',
+      name: 'id_simulation',
     },
     inverseJoinColumn: {
-      name: 'id_simulation',
+      name: 'id_scenario',
     },
   })
   scenarios: Scenario[];
