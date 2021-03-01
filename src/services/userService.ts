@@ -1,3 +1,4 @@
+import { SessionService } from './sessionService';
 import { UserI } from './../interfaces/userI';
 import { environment } from './../env/environment';
 import { UserRepository } from '../repositories/userRepository';
@@ -49,12 +50,23 @@ export class UserService {
           if (user) {
             const result = await UserService.comparePassword(password, user.data[0].password);
             const expiresIn: number = 100;
-            console.log(result);
+
             if (result) {
               const access_token = jwt.sign({ id: user.id_user }, SECRET_KEY);
-              // TODO: Insertar la sesión en la tabla session.
+
+              await SessionService.create({
+                id_user: user.data[0].id_user,
+                roles: user.data[0].roles,
+              });
               resolve({
-                user: user.data[0],
+                user: {
+                  id_user: user.data[0].id_user,
+                  name: user.data[0].name,
+                  surname: user.data[0].name,
+                  email: email,
+                  institution: user.data[0].institution,
+                  roles: user.data[0].roles,
+                },
                 access_token,
                 expiresIn,
               });

@@ -18,6 +18,8 @@ export class SimulationRepository {
       .getRepository(Simulation)
       .createQueryBuilder('simulation')
       .innerJoinAndSelect('simulation.animalSpecie', 'as')
+      .leftJoinAndSelect('as.ppPerAs', 'ppp')
+      .innerJoinAndSelect('ppp.physiologicalParameter', 'pp')
       .leftJoinAndSelect('simulation.scenarios', 'scenarios')
       .leftJoinAndSelect('scenarios.medications', 'medications')
       .leftJoinAndSelect('medications.medication', 'medication')

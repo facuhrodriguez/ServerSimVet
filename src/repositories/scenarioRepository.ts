@@ -22,16 +22,20 @@ export class ScenarioRepository {
     orderBy: any = 's.name',
     limit: number = 20
   ) {
-    let result: any = await getManager()
+    let result: any = getManager()
       .getRepository(Scenario)
       .createQueryBuilder('s')
       .leftJoinAndSelect('s.arrhythmias', 'arr')
       .leftJoinAndSelect('s.pathologies', 'pat')
       .leftJoinAndSelect('s.medications', 'med')
       .leftJoinAndSelect('med.medication', 'medication')
+      .leftJoinAndSelect('s.spp', 'spp')
+      .leftJoinAndSelect('spp.physiologicalParameter', 'ppp')
+      .leftJoinAndSelect('ppp.physiologicalParameter', 'pp')
       .where(query)
-      .orderBy(orderBy, order)
-      .paginate(limit);
+      .orderBy(orderBy, order);
+
+    result = await result.paginate(limit);
 
     return result;
   }
