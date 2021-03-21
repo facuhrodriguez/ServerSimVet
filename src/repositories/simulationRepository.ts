@@ -14,12 +14,13 @@ export class SimulationRepository {
     orderBy: any = 'simulation.name',
     limit: number = 20
   ) {
-    let result: any = await getManager()
+    console.log(query);
+    let result: any = getManager()
       .getRepository(Simulation)
       .createQueryBuilder('simulation')
       .innerJoinAndSelect('simulation.animalSpecie', 'as')
       .leftJoinAndSelect('as.ppPerAs', 'ppp')
-      .innerJoinAndSelect('ppp.physiologicalParameter', 'pp')
+      .leftJoinAndSelect('ppp.physiologicalParameter', 'pp')
       .leftJoinAndSelect('simulation.scenarios', 'scenarios')
       .leftJoinAndSelect('scenarios.medications', 'medications')
       .leftJoinAndSelect('medications.medication', 'medication')
@@ -30,17 +31,8 @@ export class SimulationRepository {
     if (scenario) {
       result = await result.andWhere(`scenarios.id_scenario = ${scenario}`);
     }
-
     result = await result.orderBy(orderBy, order).paginate(limit);
-    // .orderBy(orderBy, order)
-    // .paginate(limit);
 
-    // if (query) {
-    //   result = await result
-    //     .where(query)
-    //     .orderBy(orderBy, order)
-    //     .paginate(limit);
-    // } else result = await result.getMany();
     return result;
   }
 
