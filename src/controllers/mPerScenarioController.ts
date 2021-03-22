@@ -1,6 +1,9 @@
 import { MPerScenarioService } from './../services/mPerScenarioService';
 import { Request, Response, NextFunction } from 'express';
 export class MPerScenarioController {
+
+  constructor() {}
+  
   public create(req: Request, res: Response) {
     MPerScenarioService.create(req.body)
       .then((data) => {
