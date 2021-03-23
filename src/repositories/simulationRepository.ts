@@ -14,7 +14,6 @@ export class SimulationRepository {
     orderBy: any = 'simulation.name',
     limit: number = 20
   ) {
-    console.log(query);
     let result: any = getManager()
       .getRepository(Simulation)
       .createQueryBuilder('simulation')
@@ -22,10 +21,10 @@ export class SimulationRepository {
       .leftJoinAndSelect('as.ppPerAs', 'ppp')
       .leftJoinAndSelect('ppp.physiologicalParameter', 'pp')
       .leftJoinAndSelect('simulation.scenarios', 'scenarios')
-      .leftJoinAndSelect('scenarios.medications', 'medications')
-      .leftJoinAndSelect('medications.medication', 'medication')
       .leftJoinAndSelect('scenarios.arrhythmias', 'arr')
       .leftJoinAndSelect('scenarios.pathologies', 'pat')
+      .leftJoinAndSelect('scenarios.medications', 'medications')
+      .innerJoinAndSelect('medications.medication', 'medication')
       .where(query);
 
     if (scenario) {
@@ -49,13 +48,5 @@ export class SimulationRepository {
     if (simulationData.scenarios) simulation.scenarios = simulationData.scenarios;
     if (simulationData.animalSpecie) simulation.animalSpecie = simulationData.animalSpecie;
     return await getManager().getRepository(Simulation).save(simulation);
-    // return await getManager()
-    //   .getRepository(Simulation)
-    //   .createQueryBuilder()
-    //   .update(Simulation, simulationData)
-    //   .where({ id_simulation: id })
-    //   .returning('*')
-    //   .updateEntity(true)
-    //   .execute();
   }
 }

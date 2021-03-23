@@ -6,6 +6,12 @@ export class SimulationService {
       const { where, scenario, orderBy, order, limit } = SimulationService.setUpQuery(query);
       SimulationRepository.findAll(where, scenario, order, orderBy, limit)
         .then((simulations) => {
+          // const simulationsPruner: any[] = [];
+          // for (let i = 0; i < simulations.data.length; i++) {
+          //   if (simulations.data.medications[0].medication) {
+          //     simulationsPruner.push(simulations);
+          //   }
+          // }
           resolve(simulations);
         })
         .catch((err) => {
