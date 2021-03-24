@@ -29,9 +29,7 @@ export class ScenarioRepository {
       .leftJoinAndSelect('s.pathologies', 'pat')
       .leftJoinAndSelect('s.medications', 'med')
       .leftJoinAndSelect('med.medication', 'medication')
-      .leftJoinAndSelect('s.spp', 'spp')
-      .leftJoinAndSelect('spp.physiologicalParameter', 'ppp')
-      .leftJoinAndSelect('ppp.physiologicalParameter', 'pp')
+      .leftJoinAndSelect('s.curves', 'pp')
       .where(query)
       .orderBy(orderBy, order);
 

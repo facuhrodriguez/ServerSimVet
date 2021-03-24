@@ -1,82 +1,73 @@
-import { Scenario } from '../../entity/scenario';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 
 export default class CreateScenario implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
-    const scenarios = [
-      {
-        name: 'Scenario 01',
-        description: 'Scenario 01 for test pruposal',
-        arrhythmias: [
-          {
-            id_arr: 3,
-            name: 'Ventricular arrhythmia',
-            description:
-              ' heart’s lower chambers. They can be very dangerous and usually require medical care right away',
-          },
-        ],
-        pathologies: [
-          {
-            id_pat: 2,
-            name: 'Bovine viral diarrhoea virus',
-            description: 'Virus Bovine',
-          },
-        ],
-        medications: [
-          {
-            dose: 15,
-            unit: 'l',
-            created_at: '2021-03-23T01:32:44.609Z',
-            updated_at: '2021-03-23T01:32:44.609Z',
-            medication: {
-              id_medication: 2,
-              name: 'Amiodarone',
-              description:
-                'Amiodarone is an antiarrhythmic medication used to treat and prevent a number of types of irregular heartbeats',
-            },
-          },
-        ],
-      },
-      {
-        name: 'Scenario 02',
-        description: 'Test scenario 02',
-        arrhythmias: [
-          {
-            id_arr: 2,
-            name: 'Supraventricular arrhythmia',
-            description:
-              'are known by their fast heart rates, or tachycardia. Tachycardia occurs when the heart, at rest, goes above 100 beats per minute. The fast pace is sometimes paired with an uneven heart rhythm. Sometimes the upper and lower chambers beat at different rates.',
-          },
-        ],
-        pathologies: [
-          {
-            id_pat: 1,
-            name: 'Brucellosis',
-            description:
-              'Is a bacterial infection that spreads from animals to people. Most commonly, people are infected by eating raw or unpasteurized dairy products.',
-          },
-        ],
-        medications: [
-          {
-            dose: 15,
-            unit: 'asf',
-            created_at: '2021-03-24T01:01:32.863Z',
-            updated_at: '2021-03-24T01:01:32.863Z',
-            medication: {
-              id_medication: 2,
-              name: 'Amiodarone',
-              description:
-                'Amiodarone is an antiarrhythmic medication used to treat and prevent a number of types of irregular heartbeats',
-            },
-          },
-        ],
-      },
-    ];
+    await connection.query(
+      `insert into simvet.scenario (name, description) values ('Scenario 01', 'Scenario 01 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 02', 'Scenario 02 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 03', 'Scenario 03 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 04', 'Scenario 04 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 05', 'Scenario 05 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 06', 'Scenario 06 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 07', 'Scenario 07 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 08', 'Scenario 08 for test');
+       insert into simvet.scenario (name, description) values ('Scenario 09', 'Scenario 09 for test');
+       `
+    );
 
-    await scenarios.forEach(async (sc: any) => {
-      await connection.getRepository(Scenario).save(sc);
-    });
+    await connection.query(`insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 1);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 1);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (3, 1);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 2);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 2);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (3, 2);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 3);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 3);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (3, 3);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 4);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 4);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (3, 4);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 5);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 5);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (3, 6);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (2, 7);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 8);
+        insert into simvet.arrhythmiaperscenario (id_arr, id_scenario) values (1, 9);
+    `);
+
+    await connection.query(`insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 1, 15, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 1, 50, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (3, 1, 25, 'cc');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 2, 200, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 2, 1, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (3, 2, 10, 'cc');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 3, 25, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 3, 600, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (3, 3, 25, 'cc');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 4, 100, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 4, 800, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (3, 4, 200, 'cc');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 5, 150, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 5, 400, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (3, 6, 350, 'cc');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (2, 7, 140, 'mg');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 8, 200, 'ml');
+        insert into simvet.mperscenario (id_medication, id_scenario, dose, unit) values (1, 9, 140, 'ml');`);
+
+    await connection.query(`insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 1);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 1);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 2);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 2);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 3);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 3);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 4);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 4);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 5);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 5);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (2, 7);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 8);
+        insert into simvet.pathologyperscenario (id_pat, id_scenario) values (1, 9);`);
 
     return Promise.resolve(true);
   }

@@ -13,8 +13,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { PhysiologicalParameter } from './physiologicalParameter';
-import { Spp } from './spp';
 import { environment } from '../env/environment';
+import { PPCurve } from './ppcurve';
 @Entity('ppperas', { schema: `${environment.DB.SCHEMA}` })
 export class PPperAs extends BaseEntity {
   @ManyToOne(() => AnimalSpecies, (as) => as.ppPerAs, { primary: true })
@@ -24,6 +24,9 @@ export class PPperAs extends BaseEntity {
   @ManyToOne(() => PhysiologicalParameter, (pp) => pp.ppPerAs, { primary: true })
   @JoinColumn({ name: 'id_pp' })
   physiologicalParameter: PhysiologicalParameter;
+
+  @OneToMany(() => PPCurve, (pp) => pp.ppPerAs)
+  curves: PPCurve[];
 
   @Column({ type: 'numeric' })
   alert_low: number;

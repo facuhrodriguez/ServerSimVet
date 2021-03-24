@@ -13,8 +13,9 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
-import { Spp } from './spp';
 import { environment } from '../env/environment';
+import { PPperAs } from './ppPerAs';
+import { PPCurve } from './ppcurve';
 
 @Entity('scenario', { schema: `${environment.DB.SCHEMA}` })
 export class Scenario extends BaseEntity {
@@ -64,8 +65,8 @@ export class Scenario extends BaseEntity {
   })
   simulations: Simulation[];
 
-  @OneToMany(() => Spp, (spp) => spp.scenario)
-  spp: Spp[];
+  @OneToMany(() => PPCurve, (pp) => pp.scenario)
+  curves: PPCurve[];
 
   @CreateDateColumn()
   created_at: Date;
