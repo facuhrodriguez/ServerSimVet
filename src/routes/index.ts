@@ -1,5 +1,4 @@
 import cors from 'cors';
-import { Request, Response, NextFunction } from 'express';
 
 // Rutas
 import { AnimalSpeciesRoutes } from './animalSpeciesRoutes';
@@ -8,6 +7,7 @@ import { ArrhythmiaRoutes } from './arrhythmiaRoutes';
 import { MedicationRoutes } from './medicationRoutes';
 
 import { PathologyRoutes } from './pathologyRoutes';
+import { PPCurvesRoutes } from './ppCurvesRoutes';
 
 import { ScenarioRoutes } from './scenarioRoutes';
 
@@ -35,6 +35,7 @@ export class Routes {
     app.use('/api/scenario', ScenarioRoutes);
     app.use('/api/pathology', PathologyRoutes);
     app.use('/api/simulation', SimulationRoutes);
+    app.use('/api/curves', PPCurvesRoutes);
     app.use('/api/my-profile', UserRoutes);
     // app.use('/api/session', SessionRoutes);
     // app.use('/api/arrhythmiaPerScenario', ArrhythmiaPerScenarioRoutes);

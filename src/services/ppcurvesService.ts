@@ -1,12 +1,19 @@
-import { PPCurveRepository } from 'src/repositories/ppcurvesRepository';
+import { PPCurveRepository } from '../repositories/ppcurvesRepository';
 
 export class PPcurveService {
   constructor() {}
 
-  static findAll(query: any = null, order: { orderBy: string; order: string }) {
-    return new Promise((resolve, reject) => {
-      const { where, animalSpecie } = PPcurveService.setUpQuery(query);
-      PPCurveRepository.findAll(where, order.order, order.orderBy)
+  /**
+   * Find all curves according to @param query
+   * @param query
+   * @param order
+   * @returns
+   */
+  static findAll(query: any = null) {
+    return new Promise((resolve: any, reject: any) => {
+      const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
+
+      PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
         .then((data: any) => {
           resolve(data);
         })
@@ -15,14 +22,17 @@ export class PPcurveService {
         });
     });
   }
+
   static setUpQuery(query: any) {
     const where: any = {};
-    let animalSpecie: number, scenario: number;
+    const orderBy = query.orderBy ? query.orderBy : 'curves.t';
+    const order = query.order ? query.order : 'ASC';
+    let id_scenario: number;
+    let id_as: number;
+    if (query.animalSpecie) id_as = query.animalSpecie;
 
-    if (query.animalSpecie) animalSpecie = query.animalSpecie;
+    if (query.scenario) id_scenario = parseInt(query.scenario);
 
-    if (query.scenario) scenario = query.scenario;
-
-    return { where, animalSpecie };
+    return { where, order, orderBy, id_scenario, id_as };
   }
 }
