@@ -36,7 +36,7 @@ export class Routes {
     app.use('/api/pathology', PathologyRoutes);
     app.use('/api/simulation', SimulationRoutes);
     app.use('/api/curves', PPCurvesRoutes);
-    app.use('/api/my-profile', UserRoutes);
+    // app.use('/api/my-profile', UserRoutes);
     // app.use('/api/session', SessionRoutes);
     // app.use('/api/arrhythmiaPerScenario', ArrhythmiaPerScenarioRoutes);
     // app.use('/api/medScenario', MPerScenarioRoutes);
