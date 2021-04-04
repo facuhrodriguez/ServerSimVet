@@ -1,43 +1,47 @@
 {
   "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "commonjs",
-    "strict": false,
-    "target": "es6",
     "noImplicitAny": true,
     "sourceMap": true,
     "rootDir": "./src",
     "outDir": "dist",
     "baseUrl": ".",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "paths": {
-      "@env/*": [
-        "src/env/*"
-      ],
-      "@database/*": [
-        "src/database/*"
-      ],
-      "@interfaces/*": [
-        "src/interfaces/*"
-      ],
-      "@entities/*": [
-        "src/entities/*"
-      ],
-      "@errors/*": [
-        "src/errors/*"
-      ],
-      "../controllers/*": [
-        "src/controllers/*"
-      ],
-      "@middleware/*": [
-        "src/middleware/*"
-      ],
-      "@routes/*": [
-        "src/routes/*"
-      ]
-    }
+    "moduleResolution": "node"
+  },
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended",
+  "paths": {
+    "@env/*": [
+      "src/env/*"
+    ],
+    "@database/*": [
+      "src/database/*"
+    ],
+    "@interfaces/*": [
+      "src/interfaces/*"
+    ],
+    "@entities/*": [
+      "src/entities/*"
+    ],
+    "@errors/*": [
+      "src/errors/*"
+    ],
+    "../controllers/*": [
+      "src/controllers/*"
+    ],
+    "@middleware/*": [
+      "src/middleware/*"
+    ],
+    "@routes/*": [
+      "src/routes/*"
+    ]
   },
   "include": [
     "src/**/*"
