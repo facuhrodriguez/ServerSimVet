@@ -27,8 +27,8 @@ export class PPcurveService {
     const where: any = {};
     const orderBy = query.orderBy ? query.orderBy : 'curves.t';
     const order = query.order ? query.order : 'ASC';
-    let id_scenario: number;
-    let id_as: number;
+    let id_scenario: number = -1;
+    let id_as: number = -1;
     if (query.animalSpecie) id_as = query.animalSpecie;
 
     if (query.scenario) id_scenario = parseInt(query.scenario);

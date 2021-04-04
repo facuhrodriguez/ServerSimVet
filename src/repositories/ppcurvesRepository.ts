@@ -6,10 +6,9 @@ export class PPCurveRepository {
     query: any,
     order: any = 'DESC',
     orderBy: any = 'curves.t',
-    scenario: number = null,
-    animalSpecie: number = null
+    scenario: number = -1,
+    animalSpecie: number = -1
   ) {
-    console.log(...arguments);
     let result: any = getManager()
       .getRepository(PPCurve)
       .createQueryBuilder('curves')
@@ -22,11 +21,11 @@ export class PPCurveRepository {
       result = await result.where(query);
     }
 
-    if (scenario) {
+    if (scenario != -1) {
       result = await result.andWhere('scenario.id_scenario = :scenario', { scenario });
     }
 
-    if (animalSpecie) {
+    if (animalSpecie != -1) {
       result = await result.andWhere('animalSpecie.id_as = :animalSpecie', { animalSpecie });
     }
 
