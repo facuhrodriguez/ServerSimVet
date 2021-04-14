@@ -1,5 +1,5 @@
 import { SimulationService } from './../services/simulationService';
-import { SimulationI } from '@interfaces/simulationI';
+import { SimulationI } from '../interfaces/simulationI';
 import { Request, Response, NextFunction } from 'express';
 
 export class SimulationController {

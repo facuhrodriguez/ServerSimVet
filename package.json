@@ -14,7 +14,7 @@
     "postinstall": "npm run build",
     "start": "node --experimental-worker dist/server.js",
     "start:ts": "ts-node ./src/server.ts",
-    "start:reload": "ts-node-dev ./src/server.ts",
+    "start:reload": "ts-node ./src/server.ts",
     "db:create": "ts-node src/database/script/dbCreate.ts",
     "db:sync": "ts-node src/database/script/dbSync.ts",
     "db:seed": "npm run db:seed:config && npm run db:seed:run",
