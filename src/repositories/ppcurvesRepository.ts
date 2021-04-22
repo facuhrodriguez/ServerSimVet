@@ -1,5 +1,6 @@
 import { PPCurve } from '../entity/ppcurve';
 import { getManager } from 'typeorm';
+import { PPperAs } from '../entity/ppPerAs';
 
 export class PPCurveRepository {
   static async findAll(
@@ -10,12 +11,12 @@ export class PPCurveRepository {
     animalSpecie: number = -1
   ) {
     let result: any = getManager()
-      .getRepository(PPCurve)
-      .createQueryBuilder('curves')
-      .innerJoinAndSelect('curves.scenario', 'scenario')
-      .innerJoinAndSelect('curves.ppPerAs', 'ppperas')
-      .innerJoinAndSelect('ppperas.physiologicalParameter', 'physiologicalParamater')
-      .innerJoinAndSelect('ppperas.animalSpecie', 'animalSpecie');
+      .getRepository(PPperAs)
+      .createQueryBuilder('physiologicalperAs')
+      .innerJoinAndSelect('physiologicalperAs.animalSpecie', 'animalSpecie')
+      .innerJoinAndSelect('physiologicalperAs.physiologicalParameter', 'physiologicalParamater')
+      .innerJoinAndSelect('physiologicalperAs.curves', 'curves')
+      .innerJoinAndSelect('curves.scenario', 'scenario');
 
     if (query) {
       result = await result.where(query);
@@ -31,6 +32,6 @@ export class PPCurveRepository {
 
     result = await result.orderBy(orderBy, order);
 
-    return result.paginate(1000);
+    return result.paginate();
   }
 }

@@ -1,7 +1,10 @@
+import { CurvesI } from '../interfaces/curvesI';
+import { BaseFormat } from '../models/baseFormat';
+import { PPCurvesFormatQuery } from '../models/ppCurvesFormatQuery';
 import { PPCurveRepository } from '../repositories/ppcurvesRepository';
 
 export class PPcurveService {
-  constructor() {}
+  constructor() { }
 
   /**
    * Find all curves according to @param query
@@ -9,20 +12,27 @@ export class PPcurveService {
    * @param order
    * @returns
    */
-  static findAll(query: any = null) {
-    return new Promise((resolve: any, reject: any) => {
+  static async findAll(query: any = null): Promise<CurvesI> {
+    try {
       const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
 
-      PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
-        .then((data: any) => {
-          resolve(data);
-        })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
+      const curves: any = await PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
+      let formatQuery: BaseFormat = new PPCurvesFormatQuery(curves);
+      const queryInfoPruned = formatQuery.formatQuery();
+
+      return queryInfoPruned;
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
+  /**
+   * Build query params according with @param query
+   * @param query 
+   * @returns 
+   */
   static setUpQuery(query: any) {
     const where: any = {};
     const orderBy = query.orderBy ? query.orderBy : 'curves.t';

@@ -1,46 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es6",
     "module": "commonjs",
-    "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "rootDir": "./src",
     "outDir": "dist"
-   
-  },
-  "paths": {
-    "@env/*": [
-      "src/env/*"
-    ],
-    "@database/*": [
-      "src/database/*"
-    ],
-    "@interfaces/*": [
-      "src/interfaces/*"
-    ],
-    "@entities/*": [
-      "src/entities/*"
-    ],
-    "@errors/*": [
-      "src/errors/*"
-    ],
-    "../controllers/*": [
-      "src/controllers/*"
-    ],
-    "@middleware/*": [
-      "src/middleware/*"
-    ],
-    "@routes/*": [
-      "src/routes/*"
-    ]
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }
