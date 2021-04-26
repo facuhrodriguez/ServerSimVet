@@ -1,4 +1,3 @@
-import { PPCurve } from '../entity/ppcurve';
 import { getManager } from 'typeorm';
 import { PPperAs } from '../entity/ppPerAs';
 
@@ -15,8 +14,8 @@ export class PPCurveRepository {
       .createQueryBuilder('physiologicalperAs')
       .innerJoinAndSelect('physiologicalperAs.animalSpecie', 'animalSpecie')
       .innerJoinAndSelect('physiologicalperAs.physiologicalParameter', 'physiologicalParamater')
-      .innerJoinAndSelect('physiologicalperAs.curves', 'curves')
-      .innerJoinAndSelect('curves.scenario', 'scenario');
+      .leftJoinAndSelect('physiologicalperAs.curves', 'curves')
+      .leftJoinAndSelect('curves.scenario', 'scenario');
 
     if (query) {
       result = await result.where(query);

@@ -1,4 +1,4 @@
 export interface CurveValuesI {
-    t: number;
-    value: number;
+    t: number[];
+    value: number[];
 }

@@ -12,6 +12,6 @@ export interface CurvesI {
         name: string;
         description: string;
     },
-    curveValues: CurveValuesI;
+    curveValues: number[][];
     animalSpecie: AnimalSpecieI;
 }

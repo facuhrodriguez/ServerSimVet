@@ -12,13 +12,13 @@ export class PPcurveService {
    * @param order
    * @returns
    */
-  static async findAll(query: any = null): Promise<CurvesI> {
+  static async findAll(query: any = null): Promise<CurvesI[]> {
     try {
       const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
 
       const curves: any = await PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
       let formatQuery: BaseFormat = new PPCurvesFormatQuery(curves);
-      const queryInfoPruned = formatQuery.formatQuery();
+      const queryInfoPruned: Array<CurvesI> = formatQuery.formatQuery();
 
       return queryInfoPruned;
 

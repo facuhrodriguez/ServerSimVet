@@ -23,13 +23,24 @@ export class PPCurvesFormatQuery extends BaseFormat {
                     description: data.physiologicalParameter.description,
                     colorLine: data.physiologicalParameter?.colorLine,
                 },
-                curveValues: data.curves,
-                animalSpecie: data.animalSpecie
+                animalSpecie: data.animalSpecie,
+                curveValues: this.formatCurveValues(data.curves),
             }
             prunedQueryValues.push(auxValues);
         });
 
         return prunedQueryValues;
+    }
+
+
+
+    private formatCurveValues(curves: any[]): number[][] {
+        let curvesPruned: number[][] = [];
+        curves.forEach((curveValue: any) => {
+            curvesPruned.push([ curveValue.t, curveValue.value ]);
+        })
+
+        return curvesPruned;
     }
 
 
