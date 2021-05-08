@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
+import { StatesI } from '../interfaces/statesI';
 import { PPcurveService } from '../services/ppcurvesService';
 
 export class PPCurvesController {
-  constructor() {}
+  constructor() { }
 
   public findAll(req: Request, res: Response) {
     PPcurveService.findAll(req.query)
-      .then((curves: any) => {
+      .then((curves: StatesI) => {
         return res.status(200).json(curves);
       })
       .catch((error: any) => {

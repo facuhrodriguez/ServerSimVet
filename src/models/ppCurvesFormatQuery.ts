@@ -1,4 +1,6 @@
+import { AnimalSpecieI } from "../interfaces/animalSpecieI";
 import { CurvesI } from "../interfaces/curvesI";
+import { StatesI } from "../interfaces/statesI";
 import { BaseFormat } from "./baseFormat";
 
 export class PPCurvesFormatQuery extends BaseFormat {
@@ -7,11 +9,13 @@ export class PPCurvesFormatQuery extends BaseFormat {
         super(query);
     }
 
-    public formatQuery(): Array<CurvesI> {
+    public formatQuery(): StatesI {
+        let state: StatesI;
         const prunedQueryValues: CurvesI[] = new Array<CurvesI>();
         let auxValues: CurvesI;
+        const id_scenario: number = this.query.data[0].curves[0].scenario.id_scenario;
+        const animalSpecie: AnimalSpecieI = this.query?.data[0]?.animalSpecie;
         this.query.data.forEach((data: any) => {
-
             auxValues = {
                 curveConfiguration: {
                     alert_low: data.alert_low,
@@ -23,13 +27,17 @@ export class PPCurvesFormatQuery extends BaseFormat {
                     description: data.physiologicalParameter.description,
                     colorLine: data.physiologicalParameter?.colorLine,
                 },
-                animalSpecie: data.animalSpecie,
                 curveValues: this.formatCurveValues(data.curves),
             }
             prunedQueryValues.push(auxValues);
         });
+        state = {
+            state: animalSpecie.id_as + id_scenario,
+            animalSpecie: animalSpecie,
+            curves: prunedQueryValues,
+        }
 
-        return prunedQueryValues;
+        return state;
     }
 
 
@@ -37,7 +45,7 @@ export class PPCurvesFormatQuery extends BaseFormat {
     private formatCurveValues(curves: any[]): number[][] {
         let curvesPruned: number[][] = [];
         curves.forEach((curveValue: any) => {
-            curvesPruned.push([ curveValue.t, curveValue.value ]);
+            curvesPruned.push([curveValue.t, curveValue.value]);
         })
 
         return curvesPruned;

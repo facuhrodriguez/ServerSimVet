@@ -1,4 +1,5 @@
 import { CurvesI } from '../interfaces/curvesI';
+import { StatesI } from '../interfaces/statesI';
 import { BaseFormat } from '../models/baseFormat';
 import { PPCurvesFormatQuery } from '../models/ppCurvesFormatQuery';
 import { PPCurveRepository } from '../repositories/ppcurvesRepository';
@@ -12,13 +13,13 @@ export class PPcurveService {
    * @param order
    * @returns
    */
-  static async findAll(query: any = null): Promise<CurvesI[]> {
+  static async findAll(query: any = null): Promise<StatesI> {
     try {
       const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
 
       const curves: any = await PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
       let formatQuery: BaseFormat = new PPCurvesFormatQuery(curves);
-      const queryInfoPruned: Array<CurvesI> = formatQuery.formatQuery();
+      const queryInfoPruned: StatesI = formatQuery.formatQuery();
 
       return queryInfoPruned;
 
