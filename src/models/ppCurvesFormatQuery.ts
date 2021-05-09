@@ -45,7 +45,7 @@ export class PPCurvesFormatQuery extends BaseFormat {
     private formatCurveValues(curves: any[]): number[][] {
         let curvesPruned: number[][] = [];
         curves.forEach((curveValue: any) => {
-            curvesPruned.push([curveValue.t, curveValue.value]);
+            curvesPruned.push([+ curveValue.t, + curveValue.value]);
         })
 
         return curvesPruned;

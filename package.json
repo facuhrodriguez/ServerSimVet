@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc && npm run copydotenv",
-    "lint:fix": "eslint --ignore-path .gitignore --fix ./*",
+    "lint:fix": "eslint --ignore-path .gitignore --fix src/**/**.ts",
     "prettier": "prettier --write .",
     "copydotenv": "copyfiles .env dist",
     "postinstall": "npm run build",
