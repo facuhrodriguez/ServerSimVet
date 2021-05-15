@@ -6,13 +6,12 @@ import { LoginI } from '../interfaces/loginI';
 
 
 export class UserController {
-  public async login(req: Request, res: Response, next: NextFunction) {
+  public login(req: Request, res: Response, next: NextFunction) {
     let userData: LoginI;
     userData = {
       email: req.body.email,
       password: req.body.password,
     };
-    console.log(userData);
     UserService.login(userData.email, userData.password)
       .then((user) => {
         return res.status(200).json(user);
@@ -22,20 +21,20 @@ export class UserController {
         return res.status(err.status ? err.status : 500).json(err.msg);
       });
   }
-  public async user (req: Request, res: Response, next: NextFunction){
-   let userEmail = req.params.email;
-   let query = {
-     email: req.query?.email,
-     id_user: req.query?.id_user
-   }
+  public user(req: Request, res: Response, next: NextFunction) {
+    let userEmail = req.params.email;
+    let query = {
+      email: req.query?.email,
+      id_user: req.query?.id_user
+    }
 
     UserService.findOneByEmail(query.email)
-        .then((user)=> {
-          return res.status(200).json(user);
-        })
-        .catch((err)=>{
-          return res.status(err.status).json(err.msg);
-        })
+      .then((user) => {
+        return res.status(200).json(user);
+      })
+      .catch((err) => {
+        return res.status(err.status).json(err.msg);
+      })
   }
 
   /**
@@ -44,7 +43,7 @@ export class UserController {
    * @param res
    * @param next
    */
-  public async register(req: Request, res: Response, next: NextFunction) {
+  public register(req: Request, res: Response, next: NextFunction) {
     let userData: UserI;
     userData = {
       email: req.body.email,
@@ -52,6 +51,7 @@ export class UserController {
       surname: req.body.surname,
       password: req.body.password,
       institution: req.body?.institution,
+      roles: req.body?.role,
     };
     UserService.register(userData)
       .then((user) => {

@@ -4,6 +4,8 @@ import { environment } from './../env/environment';
 import { UserRepository } from '../repositories/userRepository';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { RoleI } from '../interfaces/roleI';
+import { JWTResponseI } from '../interfaces/JWTresponseI';
 
 export class UserService {
   static findAll(query: any) {
@@ -18,96 +20,90 @@ export class UserService {
     });
   }
 
-  static create(userData: any) {
-    return new Promise((resolve: any, reject: any) => {
-      UserRepository.create(userData)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+  static async create(userData: UserI): Promise<UserI> {
+    try {
+      const user: UserI = await UserRepository.create(userData);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  static async findOneByEmail(email: any) {
-    return new Promise((resolve: any, reject: any) => {
-      UserRepository.findByEmail(email)
-        .then((user) => {
-          resolve(user);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+  static async findOneByEmail(email: any): Promise<UserI> {
+    try {
+      const user: UserI = await UserRepository.findByEmail(email);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
-  static login(email: string, password: string) {
-    const SECRET_KEY: string = environment.JWT_SECRET;
-    return new Promise((resolve, reject) => {
-      UserService.findOneByEmail(email)
-        .then(async (user: any) => {
-          if (user) {
-            const result = await UserService.comparePassword(password, user.data[0].password);
-            const expiresIn: number = 100;
+  static async login(email: string, password: string): Promise<JWTResponseI> {
+    const SECRET_KEY: string = environment.JWT.JWT_SECRET;
+    const expiresIn: number = parseInt(environment.JWT.EXPIRES_IN) * 60 * 24;
+    try {
+      const user: UserI = await UserService.findOneByEmail(email);
+      if (user) {
+        const userDataToVerify: JWTResponseI = {
+          user: {
+            id_user: user.id_user,
+            name: user.name,
+            surname: user.name,
+            email,
+            institution: user.institution,
+            roles: user.roles,
+          },
+          expiresIn
+        }
+        const isValidPassword: boolean = await UserService.isValidPassword(password, user.password);
+        if (isValidPassword) {
+          const access_token: string = jwt.sign(userDataToVerify, SECRET_KEY);
+          userDataToVerify.access_token = access_token;
+          return userDataToVerify;
+        } else throw ({ status: 412, msg: 'Invalid password' });
 
-            if (result) {
-              const access_token = jwt.sign({ id: user.id_user }, SECRET_KEY);
+      } else throw ({ status: 412, msg: 'Invalid email' });
 
-              await SessionService.create({
-                id_user: user.data[0].id_user,
-                roles: user.data[0].roles,
-              });
-              resolve({
-                user: {
-                  id_user: user.data[0].id_user,
-                  name: user.data[0].name,
-                  surname: user.data[0].name,
-                  email: email,
-                  institution: user.data[0].institution,
-                  roles: user.data[0].roles,
-                },
-                access_token,
-                expiresIn,
-              });
-            } else {
-              reject({ status: 412, msg: 'Invalid password' });
-            }
-          } else {
-            reject({ status: 412, msg: 'Invalid email' });
-          }
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async register(userData: UserI) {
-    const encryptPassword: string = await UserService.encryptPassword(userData.password);
-    return new Promise((resolve, reject) => {
-      UserService.create({
+    try {
+      const encryptPassword: string = await UserService.encryptPassword(userData.password);
+      const user: UserI = await UserService.create({
         name: userData.name,
         surname: userData.surname,
         email: userData.email,
         password: encryptPassword,
         institution: userData?.institution,
-      })
-        .then((user) => {
-          resolve(user);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+      });
+      let auxRoles: RoleI[] = [];
+      if (!userData.roles) {
+        auxRoles.push({ id_role: 1, name: 'viewer' });
+      } else {
+        auxRoles = userData.roles;
+      }
+
+      await SessionService.create({ id_user: user.id_user, roles: auxRoles });
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
+
+  static async isValidPassword(password: string, userPassword: string): Promise<boolean> {
+    return await UserService.comparePassword(password, userPassword);
+  }
   static async encryptPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt(environment.SALT_PASSWORD);
+    const salt = await bcrypt.genSalt(environment.JWT.SALT_PASSWORD);
     return bcrypt.hash(password, salt);
   }
 
-  static async comparePassword(password: string, hash: string) {
+  static async comparePassword(password: string, hash: string): Promise<boolean> {
     return await bcrypt.compare(password, hash);
   }
 }
