@@ -23,13 +23,13 @@ export class Role extends BaseEntity {
   @JoinTable({
     name: 'session',
     joinColumn: {
-      name: 'id_user',
-    },
-    inverseJoinColumn: {
       name: 'id_role',
     },
+    inverseJoinColumn: {
+      name: 'id_user',
+    },
   })
-  users: User;
+  users: User[];
 
   @CreateDateColumn()
   created_at: Date;

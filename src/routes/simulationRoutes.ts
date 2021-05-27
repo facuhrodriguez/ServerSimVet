@@ -1,4 +1,4 @@
-import { SimulationController } from '../controllers/SimulationController';
+import { SimulationController } from '../controllers/simulationController';
 import { Router } from 'express';
 import { isAuth } from '../middleware/auth';
 

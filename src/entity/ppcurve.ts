@@ -12,6 +12,7 @@ export class PPCurve extends BaseEntity {
   @JoinColumn({ name: 'id_as', referencedColumnName: 'animalSpecie' })
   ppPerAs: PPperAs;
 
+
   @ManyToOne(() => Scenario, (scenario) => scenario.id_scenario, { primary: true })
   @JoinColumn({ name: 'id_scenario' })
   scenario: Scenario;

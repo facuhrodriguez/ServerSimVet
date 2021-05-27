@@ -1,5 +1,6 @@
 import { User } from './../entity/user';
 import { getManager } from 'typeorm';
+import { UserI } from '../interfaces/userI';
 
 export class UserRepository {
   static async create(userData: any) {
@@ -17,14 +18,22 @@ export class UserRepository {
     return result;
   }
 
-  static async findByEmail(email: any) {
-    let result: any = await getManager()
-      .getRepository(User)
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.roles', 'roles')
-      .where({ email: email });
+  static async findByEmail(email: string): Promise<UserI> {
+    try {
+      let result: any = getManager()
+        .getRepository(User)
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.roles', 'roles')
+        .where({ email: email });
 
-    result = result.paginate(1);
-    return result;
+      result = await result.paginate(1);
+      if (result.data) {
+        return result.data[0];
+      }
+      else return null;
+    } catch (error) {
+      throw error;
+    }
+
   }
 }

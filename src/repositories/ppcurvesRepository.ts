@@ -1,19 +1,67 @@
-import { PPCurve } from 'src/entity/ppcurve';
 import { getManager } from 'typeorm';
+import { PPperAs } from '../entity/ppPerAs';
 
 export class PPCurveRepository {
-  static async findAll(query: any, order: any = 'DESC', orderBy: any = 't', limit: number = 1000) {
+  static async findAll(
+    query: any,
+    order: any = 'DESC',
+    orderBy: any = 'curves.t',
+    scenario: number = -1,
+    animalSpecie: number = -1
+  ) {
     let result: any = getManager()
-      .getRepository(PPCurve)
-      .createQueryBuilder('curves')
-      .innerJoinAndSelect('curves.scenario', 'scenario')
-      .innerJoinAndSelect('curves.ppPerAs', 'ppperas')
-      .innerJoinAndSelect('ppperas.physiologicalParameter', 'physiologicalParamater')
-      .innerJoinAndSelect('ppperas.animalSpecie', 'animalSpecie');
+      .getRepository(PPperAs)
+      .createQueryBuilder('physiologicalperAs')
+      .innerJoinAndSelect('physiologicalperAs.animalSpecie', 'animalSpecie')
+      .innerJoinAndSelect('physiologicalperAs.physiologicalParameter', 'physiologicalParamater')
+      .leftJoinAndSelect('physiologicalperAs.curves', 'curves')
+      .leftJoinAndSelect('curves.scenario', 'scenario');
 
     if (query) {
-      result = await result.where(query).orderBy(orderBy, order);
+      result = await result.where(query);
     }
-    return result;
+
+    if (scenario != -1) {
+      result = await result.andWhere('scenario.id_scenario = :scenario', { scenario });
+    }
+
+    if (animalSpecie != -1) {
+      result = await result.andWhere('animalSpecie.id_as = :animalSpecie', { animalSpecie });
+    }
+
+    result = await result.orderBy(orderBy, order);
+
+    return result.paginate();
+  }
+
+
+  static async findOne(query: any,
+    order: any = 'DESC',
+    orderBy: any = 'curves.t',
+    scenario: number = -1,
+    animalSpecie: number = -1) {
+    let result: any = getManager()
+      .getRepository(PPperAs)
+      .createQueryBuilder('physiologicalperAs')
+      .innerJoinAndSelect('physiologicalperAs.animalSpecie', 'animalSpecie')
+      .innerJoinAndSelect('physiologicalperAs.physiologicalParameter', 'physiologicalParamater')
+      .leftJoinAndSelect('physiologicalperAs.curves', 'curves')
+      .leftJoinAndSelect('curves.scenario', 'scenario')
+
+    if (query) {
+      result = await result.where(query);
+    }
+
+    if (scenario != -1) {
+      result = await result.andWhere('scenario.id_scenario = :scenario', { scenario });
+    }
+
+    if (animalSpecie != -1) {
+      result = await result.andWhere('animalSpecie.id_as = :animalSpecie', { animalSpecie });
+    }
+
+    result = await result.orderBy(orderBy, order);
+
+    return result.paginate();
   }
 }

@@ -1,5 +1,5 @@
 import { ScenarioService } from './../services/scenarioService';
-import { ScenarioI } from '@interfaces/scenarioI';
+import { ScenarioI } from '../interfaces/scenarioI';
 import { Response, Request, NextFunction } from 'express';
 
 export class ScenarioController {

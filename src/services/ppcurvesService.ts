@@ -1,28 +1,49 @@
-import { PPCurveRepository } from 'src/repositories/ppcurvesRepository';
+import { CurvesI } from '../interfaces/curvesI';
+import { StatesI } from '../interfaces/statesI';
+import { BaseFormat } from '../models/baseFormat';
+import { PPCurvesFormatQuery } from '../models/ppCurvesFormatQuery';
+import { PPCurveRepository } from '../repositories/ppcurvesRepository';
 
 export class PPcurveService {
-  constructor() {}
+  constructor() { }
 
-  static findAll(query: any = null, order: { orderBy: string; order: string }) {
-    return new Promise((resolve, reject) => {
-      const { where, animalSpecie } = PPcurveService.setUpQuery(query);
-      PPCurveRepository.findAll(where, order.order, order.orderBy)
-        .then((data: any) => {
-          resolve(data);
-        })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
+  /**
+   * Find all curves according to @param query
+   * @param query
+   * @param order
+   * @returns
+   */
+  static async findAll(query: any = null): Promise<StatesI> {
+    try {
+      const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
+
+      const curves: any = await PPCurveRepository.findAll(where, order, orderBy, id_scenario, id_as)
+      let formatQuery: BaseFormat = new PPCurvesFormatQuery(curves);
+      const queryInfoPruned: StatesI = formatQuery.formatQuery();
+
+      return queryInfoPruned;
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
+
+  /**
+   * Build query params according with @param query
+   * @param query 
+   * @returns 
+   */
   static setUpQuery(query: any) {
     const where: any = {};
-    let animalSpecie: number, scenario: number;
+    const orderBy = query.orderBy ? query.orderBy : 'curves.t';
+    const order = query.order ? query.order : 'ASC';
+    let id_scenario: number = -1;
+    let id_as: number = -1;
+    if (query.animalSpecie) id_as = query.animalSpecie;
 
-    if (query.animalSpecie) animalSpecie = query.animalSpecie;
+    if (query.scenario) id_scenario = parseInt(query.scenario);
 
-    if (query.scenario) scenario = query.scenario;
-
-    return { where, animalSpecie };
+    return { where, order, orderBy, id_scenario, id_as };
   }
 }

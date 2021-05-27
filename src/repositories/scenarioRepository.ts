@@ -29,10 +29,10 @@ export class ScenarioRepository {
       .leftJoinAndSelect('s.pathologies', 'pat')
       .leftJoinAndSelect('s.medications', 'med')
       .leftJoinAndSelect('med.medication', 'medication')
-      .leftJoinAndSelect('s.curves', 'curves')
-      .leftJoinAndSelect('curves.ppPerAs', 'ppperas')
-      .leftJoinAndSelect('ppperas.physiologicalParameter', 'physiologicalParameter')
-      .leftJoinAndSelect('ppperas.animalSpecie', 'animalSpecie')
+      // .leftJoinAndSelect('s.curves', 'curves')
+      // .leftJoinAndSelect('curves.ppPerAs', 'ppperas')
+      // .leftJoinAndSelect('ppperas.physiologicalParameter', 'physiologicalParameter')
+      // .leftJoinAndSelect('ppperas.animalSpecie', 'animalSpecie')
       .where(query)
       .orderBy(orderBy, order);
 

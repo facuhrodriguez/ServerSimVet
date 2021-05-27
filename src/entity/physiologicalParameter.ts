@@ -29,6 +29,9 @@ export class PhysiologicalParameter extends BaseEntity {
   @Column({ type: 'varchar' })
   unit: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  colorLine: string;
+
   @OneToMany(() => PPperAs, (pp) => pp.animalSpecie)
   ppPerAs: PPperAs[];
 

@@ -1,10 +1,12 @@
 import { Response, Request, NextFunction } from 'express';
+import { RoleI } from '../interfaces/roleI';
 
-export const permit = (...permittedRoles: any[]) => {
+export const permit = (...permittedRoles: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     if (req.body.authUser) {
-      if (permittedRoles.includes(req.body.authUser.role)) {
-        return next();
+      for (let rol of req.body.authUser.roles) {
+        if (permittedRoles.includes(rol.name))
+          return next();
       }
       return res.status(401).json({ msg: 'You do not access!' });
     }
@@ -12,4 +14,4 @@ export const permit = (...permittedRoles: any[]) => {
   };
 };
 
-module.exports = permit;
+

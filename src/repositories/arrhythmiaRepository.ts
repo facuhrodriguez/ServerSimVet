@@ -6,13 +6,14 @@ export class ArrhythmiaRepository {
     return getManager().getRepository(Arrhythmia).save(arrData);
   }
 
-  static findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
-    return getManager()
+  static async findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
+    let results: any = await getManager()
       .getRepository(Arrhythmia)
       .createQueryBuilder()
       .where(query)
       .orderBy(orderBy, order)
       .paginate(limit);
+    return results;
   }
 
   static async updateById(id: number, arrhythmiaData: any) {
