@@ -3,6 +3,7 @@ import { AnimalSpecieI } from '../interfaces/animalSpecieI';
 import { Request, Response, NextFunction } from 'express';
 
 export class AnimalSpeciesController {
+  constructor() { }
   public create(req: Request, res: Response, next: NextFunction) {
     let as: AnimalSpecieI = {
       name: req.body.name,

@@ -21,7 +21,6 @@ export const environment = {
   JWT: {
     SALT_PASSWORD: parseInt(process.env.SALT_PASSWORD),
     JWT_SECRET: process.env.JWT_SECRET,
-    EXPIRES_IN: process.env.EXPIRES_IN
-  }
-
+    EXPIRES_IN: process.env.EXPIRES_IN,
+  },
 };

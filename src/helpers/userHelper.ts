@@ -1,5 +1,5 @@
 export const userRoles = {
-    admin: 'admin',
-    viewer: 'viewer',
-    writer: 'writer'
-}
+  admin: 'admin',
+  viewer: 'viewer',
+  writer: 'writer',
+};
