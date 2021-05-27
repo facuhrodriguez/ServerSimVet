@@ -1,8 +1,5 @@
 {
   "name": "backend",
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "version": "1.0.0",
   "description": "BackEnd del simulador",
   "main": "server.js",
