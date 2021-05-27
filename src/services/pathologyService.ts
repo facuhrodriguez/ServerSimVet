@@ -1,4 +1,4 @@
-import { PathologyRepository } from './../repositories/PathologyRepository';
+import { PathologyRepository } from './../repositories/pathologyRepository';
 
 export class PathologyService {
   static findAll(query: any, orderBy: any, order: any, limit: number) {

@@ -13,8 +13,9 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { Arrhythmia } from './arrhythmia';
-import { Spp } from './spp';
 import { environment } from '../env/environment';
+import { PPperAs } from './ppPerAs';
+import { PPCurve } from './ppcurve';
 
 @Entity('scenario', { schema: `${environment.DB.SCHEMA}` })
 export class Scenario extends BaseEntity {
@@ -49,23 +50,23 @@ export class Scenario extends BaseEntity {
   })
   arrhythmias: Arrhythmia[];
 
-  @OneToMany(() => MperScenario, (ms) => ms.scenario)
+  @OneToMany(() => MperScenario, (ms) => ms.scenario, { cascade: ['insert', 'update'] })
   medications: MperScenario[];
 
-  @ManyToMany(() => Simulation)
+  @ManyToMany(() => Simulation, { cascade: ['insert', 'update'] })
   @JoinTable({
     name: 'scenariopersimulation',
     joinColumn: {
-      name: 'id_simulation',
+      name: 'id_scenario',
     },
     inverseJoinColumn: {
-      name: 'id_scenario',
+      name: 'id_simulation',
     },
   })
   simulations: Simulation[];
 
-  @OneToMany(() => Spp, (spp) => spp.scenario)
-  spp: Spp[];
+  @OneToMany(() => PPCurve, (pp) => pp.scenario)
+  curves: PPCurve[];
 
   @CreateDateColumn()
   created_at: Date;

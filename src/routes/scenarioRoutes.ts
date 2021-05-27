@@ -1,5 +1,5 @@
 import { MPerScenarioController } from './../controllers/mPerScenarioController';
-import { ScenarioController } from '../controllers/ScenarioController';
+import { ScenarioController } from '../controllers/scenarioController';
 import { Router } from 'express';
 import { isAuth } from '../middleware/auth';
 

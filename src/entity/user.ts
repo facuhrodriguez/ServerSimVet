@@ -37,10 +37,10 @@ export class User extends BaseEntity {
   @JoinTable({
     name: 'session',
     joinColumn: {
-      name: 'id_role',
+      name: 'id_user',
     },
     inverseJoinColumn: {
-      name: 'id_user',
+      name: 'id_role',
     },
   })
   roles: Role[];
@@ -53,7 +53,7 @@ export class User extends BaseEntity {
 
   @BeforeInsert()
   async setPassword(password: string) {
-    const salt = await bcrypt.genSalt(environment.SALT_PASSWORD);
+    const salt = await bcrypt.genSalt(environment.JWT.SALT_PASSWORD);
     this.password = await bcrypt.hash(password || this.password, salt);
   }
 }

@@ -1,5 +1,5 @@
 import { ScenarioService } from './../services/scenarioService';
-import { ScenarioI } from '@interfaces/scenarioI';
+import { ScenarioI } from '../interfaces/scenarioI';
 import { Response, Request, NextFunction } from 'express';
 
 export class ScenarioController {
@@ -53,9 +53,12 @@ export class ScenarioController {
   public updateById(req: Request, res: Response, next: NextFunction) {
     const id = parseInt(req.params.id);
 
-    const scenarioData: ScenarioI = {
+    const scenarioData: any = {
       name: req.body.name,
       description: req.body?.description,
+      arrhythmias: req.body?.arrhythmias,
+      medications: req.body?.medications,
+      pathologies: req.body?.pathologies,
     };
 
     ScenarioService.updateById(id, scenarioData)

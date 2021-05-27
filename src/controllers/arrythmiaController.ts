@@ -1,4 +1,4 @@
-import { ArrhythmiaI } from '@interfaces/arrhythmiaI';
+import { ArrhythmiaI } from '../interfaces/arrhythmiaI';
 import { Request, Response, NextFunction } from 'express';
 import { ArrhythmiaService } from '../services/arrhythmiaService';
 

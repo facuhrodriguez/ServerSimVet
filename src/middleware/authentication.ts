@@ -1,3 +1,4 @@
+import { environment } from './../env/environment';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
@@ -7,22 +8,20 @@ export const authentication = async (req: Request, res: Response, next: NextFunc
     if (
       req.headers &&
       req.headers.authorization &&
-      req.headers.authorization.split(' ')[0] === 'JWT'
-    )
-      jwtToken = req.headers.authorization.split(' ')[1];
-    else if (req.query && req.query.access_token) jwtToken = req.query.access_token.toString();
+      req.headers.authorization.split(' ')[0] === 'Bearer'
+    ) jwtToken = req.headers.authorization.split(' ')[1];
 
     // Process JWT token
     if (jwtToken) {
-      jwt.verify(jwtToken, process.env.JWT_SECRET, (err, decode: any) => {
+      jwt.verify(jwtToken, environment.JWT.JWT_SECRET, (err, decode: any) => {
         if (err) {
           req.body.authUser = undefined;
+          next();
         }
-
         // Check if token is expired
         if (decode) {
-          const now = Math.floor(Date.now() / 1000);
-          if (!decode.exp || now > decode.exp) {
+          const now = Date.now();
+          if (!decode.expiresIn || now > decode.expiresIn * 1000) {
             req.body.authUser = undefined;
             return next();
           }

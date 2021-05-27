@@ -1,5 +1,5 @@
 import express from 'express';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import { Routes } from './routes';
 const errors = require('./middleware/errors');
 import { DatabaseConfig } from './database/db';
@@ -27,9 +27,9 @@ class App {
    * TODO: Add logger and security functions.
    */
   private config(): void {
-    this.app.use(bodyParser.json()); // Parámetros con formato Json
-    this.app.use(bodyParser.urlencoded({ extended: false })); // Permite obtener los parámetros de peticiones
-    this.app.use(errors); // Midlleware para manejo de errores.
+    this.app.use(express.json()); // Parámetros con formato Json
+    this.app.use(express.urlencoded({ extended: false })); // Permite obtener los parámetros de peticiones
+    // this.app.use(errors); // Midlleware para manejo de errores.
   }
 }
 

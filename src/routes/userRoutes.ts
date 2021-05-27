@@ -1,4 +1,4 @@
-import { UserController } from '../controllers/UserController';
+import { UserController } from '../controllers/userController';
 import { Router } from 'express';
 import { isAuth } from '../middleware/auth';
 

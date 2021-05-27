@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PathologyController } from '../controllers/PathologyController';
+import { PathologyController } from '../controllers/pathologyController';
 import { isAuth } from '../middleware/auth';
 
 const pathologyController: PathologyController = new PathologyController();

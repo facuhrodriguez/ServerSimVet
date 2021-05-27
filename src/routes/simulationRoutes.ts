@@ -1,4 +1,4 @@
-import { SimulationController } from '../controllers/SimulationController';
+import { SimulationController } from '../controllers/simulationController';
 import { Router } from 'express';
 import { isAuth } from '../middleware/auth';
 
@@ -11,8 +11,12 @@ router
   .get(isAuth, simulationController.findAll);
 
 router
-  .route('/:id')
+  .route('/:id_simulation')
   .put(isAuth, simulationController.updateById)
   .delete(isAuth, simulationController.deleteById);
+
+router
+  .route('/scenarios/:id_scenario')
+  .get(isAuth, simulationController.getSimulationsFromScenario);
 
 export const SimulationRoutes: Router = router;

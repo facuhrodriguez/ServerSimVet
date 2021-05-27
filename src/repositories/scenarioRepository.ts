@@ -6,14 +6,14 @@ import { getManager, EntityManager, ObjectID } from 'typeorm';
 
 export class ScenarioRepository {
   static async create(scenario: any) {
-    return await getManager()
-      .getRepository(Scenario)
-      .createQueryBuilder()
-      .insert()
-      .into(Scenario)
-      .values(scenario)
-      .returning('*')
-      .execute();
+    const newScenario: Scenario = new Scenario();
+    newScenario.name = scenario.name;
+    if (scenario.description) newScenario.description = scenario.description;
+    if (scenario.pathologies) newScenario.pathologies = scenario.pathologies;
+    if (scenario.arrhythmias) newScenario.arrhythmias = scenario.arrhythmias;
+    if (scenario.medications) newScenario.medications = scenario.medications;
+
+    return await getManager().getRepository(Scenario).save(newScenario);
   }
 
   static async findAll(
@@ -22,17 +22,21 @@ export class ScenarioRepository {
     orderBy: any = 's.name',
     limit: number = 20
   ) {
-    let result: any = await getManager()
+    let result: any = getManager()
       .getRepository(Scenario)
       .createQueryBuilder('s')
-      .leftJoinAndSelect('s.simulations', 'sim')
       .leftJoinAndSelect('s.arrhythmias', 'arr')
       .leftJoinAndSelect('s.pathologies', 'pat')
       .leftJoinAndSelect('s.medications', 'med')
       .leftJoinAndSelect('med.medication', 'medication')
+      // .leftJoinAndSelect('s.curves', 'curves')
+      // .leftJoinAndSelect('curves.ppPerAs', 'ppperas')
+      // .leftJoinAndSelect('ppperas.physiologicalParameter', 'physiologicalParameter')
+      // .leftJoinAndSelect('ppperas.animalSpecie', 'animalSpecie')
       .where(query)
-      .orderBy(orderBy, order)
-      .paginate(limit);
+      .orderBy(orderBy, order);
+
+    result = await result.paginate(limit);
 
     return result;
   }
@@ -41,7 +45,6 @@ export class ScenarioRepository {
     return getManager()
       .getRepository(Scenario)
       .createQueryBuilder('s')
-      .leftJoinAndSelect('s.simulations', 'sim')
       .leftJoinAndSelect('s.arrhythmias', 'arr')
       .leftJoinAndSelect('s.pathologies', 'pat')
       .leftJoinAndSelect('s.mPerScenario', 'med')
@@ -54,14 +57,15 @@ export class ScenarioRepository {
   }
 
   static async updateById(id: number, scenarioData: any) {
-    return await getManager()
-      .getRepository(Scenario)
-      .createQueryBuilder()
-      .update(Scenario, scenarioData)
-      .where({ id_scenario: id })
-      .returning('*')
-      .updateEntity(true)
-      .execute();
+    const newScenario: Scenario = new Scenario();
+    newScenario.id_scenario = id;
+    if (scenarioData.name) newScenario.name = scenarioData.name;
+
+    if (scenarioData.description) newScenario.description = scenarioData.description;
+    if (scenarioData.pathologies) newScenario.pathologies = scenarioData.pathologies;
+    if (scenarioData.arrhythmias) newScenario.arrhythmias = scenarioData.arrhythmias;
+    if (scenarioData.medications) newScenario.medications = scenarioData.medications;
+    return await getManager().getRepository(Scenario).save(newScenario);
   }
 
   static async saveArrhythmias(id_scenario: number, arrhythmias: any) {
