@@ -18,7 +18,7 @@ export class UserRepository {
     return result;
   }
 
-  static async findByEmail(email: string): Promise<UserI> {
+  static async findByEmail(email: string): Promise<UserI | null> {
     try {
       let result: any = getManager()
         .getRepository(User)

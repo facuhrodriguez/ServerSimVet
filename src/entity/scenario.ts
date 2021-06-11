@@ -20,13 +20,13 @@ import { PPCurve } from './ppcurve';
 @Entity('scenario', { schema: `${environment.DB.SCHEMA}` })
 export class Scenario extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_scenario: number;
+  id_scenario!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description!: string;
 
   @ManyToMany(() => Pathology)
   @JoinTable({
@@ -36,7 +36,7 @@ export class Scenario extends BaseEntity {
     },
     inverseJoinColumn: { name: 'id_pat' },
   })
-  pathologies: Pathology[];
+  pathologies!: Pathology[];
 
   @ManyToMany(() => Arrhythmia)
   @JoinTable({
@@ -48,10 +48,10 @@ export class Scenario extends BaseEntity {
       name: 'id_arr',
     },
   })
-  arrhythmias: Arrhythmia[];
+  arrhythmias!: Arrhythmia[];
 
   @OneToMany(() => MperScenario, (ms) => ms.scenario, { cascade: ['insert', 'update'] })
-  medications: MperScenario[];
+  medications!: MperScenario[];
 
   @ManyToMany(() => Simulation, { cascade: ['insert', 'update'] })
   @JoinTable({
@@ -63,14 +63,14 @@ export class Scenario extends BaseEntity {
       name: 'id_simulation',
     },
   })
-  simulations: Simulation[];
+  simulations!: Simulation[];
 
   @OneToMany(() => PPCurve, (pp) => pp.scenario)
-  curves: PPCurve[];
+  curves!: PPCurve[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

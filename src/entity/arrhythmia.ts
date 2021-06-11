@@ -14,13 +14,13 @@ import { Scenario } from './scenario';
 @Entity('arrhytmia', { schema: `${environment.DB.SCHEMA}` })
 export class Arrhythmia extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_arr: number;
+  id_arr!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description!: string;
 
   @ManyToMany(() => Scenario)
   @JoinTable({
@@ -32,11 +32,11 @@ export class Arrhythmia extends BaseEntity {
       name: 'id_scenario',
     },
   })
-  scenarios: Scenario[];
+  scenarios!: Scenario[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

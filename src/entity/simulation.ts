@@ -17,13 +17,13 @@ import { environment } from '../env/environment';
 @Entity('simulation', { schema: `${environment.DB.SCHEMA}` })
 export class Simulation extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_simulation: number;
+  id_simulation!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description!: string;
 
   @ManyToMany(() => Scenario, { cascade: ['insert', 'update'] })
   @JoinTable({
@@ -35,15 +35,15 @@ export class Simulation extends BaseEntity {
       name: 'id_scenario',
     },
   })
-  scenarios: Scenario[];
+  scenarios!: Scenario[];
 
   @ManyToOne(() => AnimalSpecies, (as) => as.simulation, { cascade: ['insert', 'update'] })
   @JoinColumn({ name: 'id_as' })
-  animalSpecie: AnimalSpecies;
+  animalSpecie!: AnimalSpecies;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

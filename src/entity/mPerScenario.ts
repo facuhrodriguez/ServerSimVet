@@ -16,22 +16,22 @@ import { Scenario } from './scenario';
 @Entity('mperscenario', { schema: `${environment.DB.SCHEMA}` })
 export class MperScenario extends BaseEntity {
   @Column({ type: 'numeric' })
-  dose: number;
+  dose!: number;
 
   @Column({ type: 'varchar' })
-  unit: string;
+  unit!: string;
 
   @ManyToOne(() => Medication, (medication) => medication.scenarios, { primary: true })
   @JoinColumn({ name: 'id_medication' })
-  medication: Medication;
+  medication!: Medication;
 
   @ManyToOne(() => Scenario, (scenario) => scenario.medications, { primary: true })
   @JoinColumn({ name: 'id_scenario' })
-  scenario: Scenario;
+  scenario!: Scenario;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

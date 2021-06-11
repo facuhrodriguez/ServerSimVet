@@ -5,7 +5,7 @@ export interface UserI {
   email: string;
   name: string;
   surname: string;
-  password?: string;
+  password: string;
   institution?: string;
   roles?: RoleI[];
 }

@@ -29,10 +29,12 @@ export class UserService {
     }
   }
 
-  static async findOneByEmail(email: any): Promise<UserI> {
+  static async findOneByEmail(email: any): Promise<UserI | null> {
     try {
-      const user: UserI = await UserRepository.findByEmail(email);
-      return user;
+      const user: UserI | null = await UserRepository.findByEmail(email);
+      if (user)
+        return user;
+      return null;
     } catch (error) {
       throw error;
     }
@@ -40,9 +42,9 @@ export class UserService {
 
   static async login(email: string, password: string): Promise<JWTResponseI> {
     const SECRET_KEY: string = environment.JWT.JWT_SECRET;
-    const expiresIn: number = parseInt(environment.JWT.EXPIRES_IN) * 60 * 24;
+    const expiresIn: number = environment.JWT.EXPIRES_IN * 60 * 24;
     try {
-      const user: UserI = await UserService.findOneByEmail(email);
+      const user: UserI | null = await UserService.findOneByEmail(email);
       if (user) {
         const userDataToVerify: JWTResponseI = {
           user: {
@@ -55,13 +57,14 @@ export class UserService {
           },
           expiresIn
         }
-        const isValidPassword: boolean = await UserService.isValidPassword(password, user.password);
-        if (isValidPassword) {
-          const access_token: string = jwt.sign(userDataToVerify, SECRET_KEY);
-          userDataToVerify.access_token = access_token;
-          return userDataToVerify;
-        } else throw ({ status: 412, msg: 'Invalid password' });
-
+        if (user.password) {
+          const isValidPassword: boolean = await UserService.isValidPassword(password, user.password);
+          if (isValidPassword) {
+            const access_token: string = jwt.sign(userDataToVerify, SECRET_KEY);
+            userDataToVerify.access_token = access_token;
+            return userDataToVerify;
+          } else throw ({ status: 412, msg: 'Invalid password' });
+        } else throw ({ status: 412, msg: 'Invalid user' })
       } else throw ({ status: 412, msg: 'Invalid email' });
 
     } catch (error) {
@@ -71,6 +74,7 @@ export class UserService {
 
   static async register(userData: UserI) {
     try {
+
       const encryptPassword: string = await UserService.encryptPassword(userData.password);
       const user: UserI = await UserService.create({
         name: userData.name,
@@ -79,14 +83,15 @@ export class UserService {
         password: encryptPassword,
         institution: userData?.institution,
       });
+
       let auxRoles: RoleI[] = [];
       if (!userData.roles) {
         auxRoles.push({ id_role: 1, name: 'viewer' });
       } else {
         auxRoles = userData.roles;
       }
-
-      await SessionService.create({ id_user: user.id_user, roles: auxRoles });
+      if (user.id_user)
+        await SessionService.create({ id_user: user.id_user, roles: auxRoles });
 
       return user;
     } catch (error) {

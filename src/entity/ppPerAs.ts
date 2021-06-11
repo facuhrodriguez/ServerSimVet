@@ -19,24 +19,24 @@ import { PPCurve } from './ppcurve';
 export class PPperAs extends BaseEntity {
   @ManyToOne(() => AnimalSpecies, (as) => as.ppPerAs, { primary: true })
   @JoinColumn({ name: 'id_as' })
-  animalSpecie: AnimalSpecies;
+  animalSpecie!: AnimalSpecies;
 
   @ManyToOne(() => PhysiologicalParameter, (pp) => pp.ppPerAs, { primary: true })
   @JoinColumn({ name: 'id_pp' })
-  physiologicalParameter: PhysiologicalParameter;
+  physiologicalParameter!: PhysiologicalParameter;
 
   @OneToMany(() => PPCurve, (pp) => pp.ppPerAs)
-  curves: PPCurve[];
+  curves!: PPCurve[];
 
   @Column({ type: 'numeric' })
-  alert_low: number;
+  alert_low!: number;
 
   @Column({ type: 'numeric' })
-  alert_high: number;
+  alert_high!: number;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

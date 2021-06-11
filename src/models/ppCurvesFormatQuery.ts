@@ -9,7 +9,7 @@ export class PPCurvesFormatQuery extends BaseFormat {
         super(query);
     }
 
-    public formatQuery(): StatesI {
+    public formatQuery(): StatesI | null {
         let state: StatesI;
         const prunedQueryValues: CurvesI[] = new Array<CurvesI>();
         let auxValues: CurvesI;
@@ -29,18 +29,21 @@ export class PPCurvesFormatQuery extends BaseFormat {
                         name: data.physiologicalParameter.name,
                         description: data.physiologicalParameter.description,
                         colorLine: data.physiologicalParameter?.colorLine,
+                        rate: data.physiologicalParameter?.rate
                     },
                     curveValues: this.formatCurveValues(data.curves),
                 }
                 prunedQueryValues.push(auxValues);
             });
-            state = {
-                state: animalSpecie.id_as + id_scenario,
-                animalSpecie: animalSpecie,
-                curves: prunedQueryValues,
-            }
+            if (animalSpecie.id_as) {
+                state = {
+                    state: animalSpecie.id_as + id_scenario,
+                    animalSpecie: animalSpecie,
+                    curves: prunedQueryValues,
+                }
 
-            return state;
+                return state;
+            }
         }
         return null;
     }

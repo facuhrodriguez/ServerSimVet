@@ -15,15 +15,5 @@ export class MPerScenarioService {
     });
   }
 
-  static findAll(query: any) {
-    return new Promise((resolve, reject) => {
-      MPerScenarioRepository.findAll(query)
-        .then((_data) => {
-          resolve(_data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
+
 }

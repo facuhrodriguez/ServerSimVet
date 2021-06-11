@@ -12,19 +12,13 @@ export class MPerScenarioRepository {
     const _data = new MperScenario();
     _data.dose = data.dose;
     _data.unit = data.unit;
-    _data.medication = medication;
-    _data.scenario = scenario;
+    if (medication)
+      _data.medication = medication;
+    if (scenario)
+      _data.scenario = scenario;
 
     return getManager().getRepository(MperScenario).save(_data);
   }
 
-  static findAll(query: any, order: any = 'DESC', orderBy: any = 'name', limit: number = 20) {
-    return getManager()
-      .getRepository(MperScenario)
-      .createQueryBuilder('m')
-      .leftJoinAndSelect('m.medications', 'medications')
-      .where(query)
-      .orderBy(orderBy, order)
-      .paginate(limit);
-  }
+
 }

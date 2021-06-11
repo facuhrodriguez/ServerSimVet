@@ -2,6 +2,7 @@ import { UserI } from './../interfaces/userI';
 import { UserService } from './../services/userService';
 import { Request, Response, NextFunction } from 'express';
 import { LoginI } from '../interfaces/loginI';
+import { JWTResponseI } from '../interfaces/JWTresponseI';
 
 
 
@@ -13,7 +14,7 @@ export class UserController {
       password: req.body.password,
     };
     UserService.login(userData.email, userData.password)
-      .then((user) => {
+      .then((user: JWTResponseI) => {
         return res.status(200).json(user);
       })
       .catch((err) => {

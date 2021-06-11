@@ -14,10 +14,10 @@ import { User } from './user';
 @Entity('role', { schema: `${environment.DB.SCHEMA}` })
 export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_role: number;
+  id_role!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @ManyToMany(() => User)
   @JoinTable({
@@ -29,11 +29,11 @@ export class Role extends BaseEntity {
       name: 'id_user',
     },
   })
-  users: User[];
+  users!: User[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

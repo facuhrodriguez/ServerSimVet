@@ -7,37 +7,40 @@ import {
   OneToMany,
   CreateDateColumn,
 } from 'typeorm';
-import { Medication } from './medication';
-import { Pathology } from './pathology';
+
 import { PPperAs } from './ppPerAs';
-import { Scenario } from './scenario';
+
 
 @Entity('physiologicalparameter', { schema: `${environment.DB.SCHEMA}` })
 export class PhysiologicalParameter extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_pp: number;
+  id_pp!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description!: string;
 
   @Column({ type: 'varchar' })
-  label: string;
+  label!: string;
 
   @Column({ type: 'varchar' })
-  unit: string;
+  unit!: string;
+
+  // Heart rate or breath
+  @Column({ type: 'varchar', nullable: true })
+  rate!: string;
 
   @Column({ type: 'varchar', nullable: true })
-  colorLine: string;
+  colorLine!: string;
 
   @OneToMany(() => PPperAs, (pp) => pp.animalSpecie)
-  ppPerAs: PPperAs[];
+  ppPerAs!: PPperAs[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

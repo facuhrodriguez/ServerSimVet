@@ -14,6 +14,7 @@ export default class CreatePhysiologicalParamater implements Seeder {
                     description: 'Fuerza de la sangre contra las paredes de los vasos sanguíneos',
                     label: 'IBP',
                     unit: 'mmHg',
+                    rate: 'heart',
                     colorLine: '#73648B'
                 },
                 {
@@ -21,6 +22,7 @@ export default class CreatePhysiologicalParamater implements Seeder {
                     description: 'Saturación de oxígeno',
                     label: 'sp02',
                     unit: '%',
+                    rate: 'breath',
                     colorLine: '#A77955'
                 },
                 {
@@ -28,6 +30,7 @@ export default class CreatePhysiologicalParamater implements Seeder {
                     description: 'Tensión de CO2 en el gas espirado durante el ciclo respiratorio',
                     label: 'etC02',
                     unit: 'mmHg',
+                    rate: 'breath',
                     colorLine: '#6DC0EC'
                 },
                 {
@@ -35,6 +38,7 @@ export default class CreatePhysiologicalParamater implements Seeder {
                     description: 'Frecuencia cardíaca:  valor absoluto en ondas PQRST/min.',
                     label: 'ECG',
                     unit: 'mm/s',
+                    rate: 'heart',
                     colorLine: '#577E5F'
                 },
                 {
@@ -53,7 +57,9 @@ export default class CreatePhysiologicalParamater implements Seeder {
                     name: 'Presión sanguínea no invasiva',
                     description: 'Fuerza de la sangre contra las paredes de los vasos sanguíneos',
                     label: 'NIBP',
-                    unit: 'mmHg'
+                    unit: 'mmHg',
+                    rate: 'heart',
+
                 },
                 {
                     name: 'Ciclo Cardíaco',

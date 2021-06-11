@@ -1,7 +1,8 @@
 import { UserI } from "./userI";
+import { UserJWTI } from "./userJWTI";
 
 export interface JWTResponseI {
-    user: UserI,
+    user: UserJWTI,
     expiresIn: number,
     access_token?: string
 }

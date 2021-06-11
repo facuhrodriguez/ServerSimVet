@@ -13,7 +13,7 @@ export class PPcurveService {
    * @param order
    * @returns
    */
-  static async findAll(query: any = null): Promise<StatesI> {
+  static async findAll(query: any = null): Promise<StatesI | undefined> {
     try {
       const { where, order, orderBy, id_scenario, id_as } = PPcurveService.setUpQuery(query);
 

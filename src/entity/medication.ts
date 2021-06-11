@@ -16,21 +16,21 @@ import { environment } from '../env/environment';
 @Entity('medication', { schema: `${environment.DB.SCHEMA}` })
 export class Medication extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_medication: number;
+  id_medication!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description!: string;
 
   @OneToMany(() => MperScenario, (mperScenario) => mperScenario.medication)
   @JoinColumn({ name: 'id_scenario' })
-  scenarios: Scenario[];
+  scenarios!: Scenario[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

@@ -59,7 +59,7 @@ export class SimulationService {
 
   static setUpQuery(query: any) {
     let where: any = {};
-    let scenario: number;
+    let scenario: number | undefined;
     const orderBy = query.orderBy ? query.orderBy : 'simulation.name';
     const order = query.order ? query.order : 'ASC';
     const limit: number = query.limit ? parseInt(query.limit.toString()) : 10;

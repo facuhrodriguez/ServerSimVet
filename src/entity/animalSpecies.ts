@@ -14,23 +14,23 @@ import {
 @Entity('animalspecies', { schema: `${environment.DB.SCHEMA}` })
 export class AnimalSpecies extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_as: number;
+  id_as!: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar', nullable: true })
-  description: string;
+  description!: string;
 
   @OneToMany(() => PPperAs, (pp) => pp.animalSpecie)
-  ppPerAs: PPperAs[];
+  ppPerAs!: PPperAs[];
 
   @OneToMany(() => Simulation, (sim) => sim.animalSpecie)
-  simulation: Simulation[];
+  simulation!: Simulation[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 }

@@ -16,22 +16,22 @@ import { environment } from '../env/environment';
 @Entity('User', { schema: `${environment.DB.SCHEMA}` })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id_user: number;
+  id_user!: number;
 
   @Column({ type: 'varchar', unique: true, name: 'e_mail' })
-  email: string;
+  email!: string;
 
   @Column({ type: 'varchar' })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar' })
-  surname: string;
+  surname!: string;
 
   @Column({ type: 'varchar' })
-  password: string;
+  password!: string;
 
   @Column({ type: 'varchar', nullable: true })
-  institution: string;
+  institution!: string;
 
   @ManyToMany(() => Role)
   @JoinTable({
@@ -43,13 +43,13 @@ export class User extends BaseEntity {
       name: 'id_role',
     },
   })
-  roles: Role[];
+  roles!: Role[];
 
   @UpdateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   @BeforeInsert()
   async setPassword(password: string) {
