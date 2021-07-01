@@ -1,5 +1,7 @@
+import { PPCurve } from "../entity/ppcurve";
 import { AnimalSpecieI } from "../interfaces/animalSpecieI";
 import { CurvesI } from "../interfaces/curvesI";
+import { CurveValuesI } from "../interfaces/curveValuesI";
 import { StatesI } from "../interfaces/statesI";
 import { BaseFormat } from "./baseFormat";
 
@@ -19,6 +21,7 @@ export class PPCurvesFormatQuery extends BaseFormat {
                 this.query.data[0]?.curves[0]?.scenario?.id_scenario : null;
             const animalSpecie: AnimalSpecieI = this.query?.data[0]?.animalSpecie;
             this.query.data.forEach((data: any) => {
+
                 auxValues = {
                     curveConfiguration: {
                         alert_low: data.alert_low,
@@ -48,16 +51,28 @@ export class PPCurvesFormatQuery extends BaseFormat {
         return null;
     }
 
-
-
-    private formatCurveValues(curves: any[]): number[][] {
-        let curvesPruned: number[][] = [];
-        curves.forEach((curveValue: any) => {
-            curvesPruned.push([+ curveValue.t, + curveValue.value]);
-        })
-
-        return curvesPruned;
+    private formatCurveValues(curves: PPCurve[]): CurveValuesI {
+        let newCurves: CurveValuesI = {
+            t: [],
+            value: []
+        };
+        curves.forEach((data: PPCurve) => {
+            newCurves.t.push(+data.t);
+            newCurves.value.push(+data.value);
+        });
+        return newCurves;
     }
+
+
+
+    // private formatCurveValues(curves: any[]): number[] {
+    //     let curvesPruned: CurveValuesI[] = [];
+    //     curves.forEach((curveValue: any) => {
+    //         curvesPruned.push(+ curveValue.t);
+    //     })
+
+    //     return curvesPruned;
+    // }
 
 
 

@@ -1,3 +1,5 @@
+import { CurveValuesI } from "./curveValuesI";
+
 export interface CurvesI {
     curveConfiguration: {
         alert_low: number;
@@ -10,5 +12,5 @@ export interface CurvesI {
         name: string;
         description: string;
     },
-    curveValues: number[][];
+    curveValues: CurveValuesI
 }
